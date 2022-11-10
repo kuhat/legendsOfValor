@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4399c6f5-6a81-40fd-8f23-ddbe102bbb40" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monstersAndHeroes.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/FactoryCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/GameRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/GameState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/RPGGame/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/RPGGame/Cell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/RPGGame/InaccessibleCell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/RPGGame/MarketCell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/RPGGame/RPGItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/RPGGame/normalCell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/Buyable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/Prop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/RoleFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/Sellable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/attackable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/heroes/Hero.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/heroes/HeroFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/heroes/Paladin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/heroes/Party.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/heroes/Sorceror.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/heroes/Warrior.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/item/Armor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/item/Inventory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/item/ItemFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/item/Potion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/item/Spell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/item/SpellFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/item/Weapon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/item/fireSpell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/item/iceSpell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/item/lingtningSpell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/monsters/Dragon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/monsters/Exoskeleton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/monsters/Monster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/monsters/MonsterFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/monsters/Spirit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/mountable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/utils/fileReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/utils/instructions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2H3MgesMLIUNFghkwAt9x42QCmu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/zwh/coursework/BU/Sem1/CS611/CW3/CW3/Legends_Monsters_Heroes/monstersAndHerios&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main" />
+      <module name="monstersAndHeroes" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4399c6f5-6a81-40fd-8f23-ddbe102bbb40" name="Changes" comment="" />
+      <created>1667509429919</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667509429919</updated>
+      <workItem from="1667509431210" duration="3545000" />
+      <workItem from="1667521206450" duration="8905000" />
+      <workItem from="1667598158181" duration="3612000" />
+      <workItem from="1667610123927" duration="12164000" />
+      <workItem from="1667676065409" duration="10874000" />
+      <workItem from="1667710432363" duration="2642000" />
+      <workItem from="1667787838954" duration="10115000" />
+      <workItem from="1667834962588" duration="9292000" />
+      <workItem from="1667851642733" duration="13619000" />
+      <workItem from="1667874119898" duration="8316000" />
+      <workItem from="1667924489382" duration="601000" />
+      <workItem from="1667939211626" duration="11547000" />
+      <workItem from="1667960805192" duration="7408000" />
+      <workItem from="1668009190441" duration="9215000" />
+      <workItem from="1668022965115" duration="15176000" />
+      <workItem from="1668048103911" duration="8726000" />
+      <workItem from="1668090759991" duration="25486000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/game/role/attackable.java</url>
+          <line>3</line>
+          <properties class="game.role.attackable" method="attack">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
