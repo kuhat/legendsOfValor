@@ -13,7 +13,7 @@ import java.util.List;
  * @package: game.role.item
  * @className: spellFactory
  * @author: Danny
- * @description: TODO
+ * @description: Spell factory to create spells
  * @date: 2022/11/7 11:15
  * @version: 1.0
  */

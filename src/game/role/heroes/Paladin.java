@@ -5,7 +5,7 @@ package game.role.heroes;
  * @package: game.role.heroes
  * @className: Paladin
  * @author: Danny
- * @description: TODO
+ * @description: Paladin hero
  * @date: 2022/11/3 21:23
  * @version: 1.0
  */

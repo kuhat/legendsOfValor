@@ -7,7 +7,7 @@ import game.RPGGame.RPGItem;
  * @package: game.role.item
  * @className: Spell
  * @author: Danny
- * @description: TODO
+ * @description: Base Spell instance
  * @date: 2022/11/3 21:47
  * @version: 1.0
  */

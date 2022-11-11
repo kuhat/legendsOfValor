@@ -5,7 +5,7 @@ package game;
  * @package: game
  * @className: GameState
  * @author: Danny
- * @description: TODO
+ * @description: Game State of an game: run, isOver, Start, init
  * @date: 2022/11/3 22:24
  * @version: 1.0
  */

@@ -11,7 +11,7 @@ import java.util.List;
  * @package: game.role.heroes
  * @className: Party
  * @author: Danny
- * @description: TODO
+ * @description: A party of heroes in the game
  * @date: 2022/11/4 23:01
  * @version: 1.0
  */

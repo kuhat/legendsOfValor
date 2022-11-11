@@ -8,7 +8,7 @@ import game.role.heroes.Hero;
  * @package: game
  * @className: role
  * @author: Danny
- * @description: TODO
+ * @description: base role instance inherited by monsters and heroes
  * @date: 2022/11/3 18:27
  * @version: 1.0
  */

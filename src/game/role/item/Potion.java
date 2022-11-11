@@ -9,7 +9,7 @@ import java.util.HashMap;
  * @package: game.role.item
  * @className: Potion
  * @author: Danny
- * @description: TODO
+ * @description: Potion instance
  * @date: 2022/11/3 21:47
  * @version: 1.0
  */

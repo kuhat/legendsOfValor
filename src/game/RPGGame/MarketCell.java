@@ -18,7 +18,7 @@ import static game.GameRunner.*;
  * @package: game.RPGGame
  * @className: MarketCell
  * @author: Danny
- * @description: TODO
+ * @description: the cell where heroes can sell or buy items
  * @date: 2022/11/3 22:03
  * @version: 1.0
  */

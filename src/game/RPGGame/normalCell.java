@@ -22,7 +22,7 @@ import static game.RPGGame.Board.BLUE;
  * @package: game.RPGGame
  * @className: normalCell
  * @author: Danny
- * @description: TODO
+ * @description: a Cell where battle may happen
  * @date: 2022/11/3 22:02
  * @version: 1.0
  */

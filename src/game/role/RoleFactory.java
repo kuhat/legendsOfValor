@@ -8,7 +8,7 @@ import game.Product;
  * @package: game.role
  * @className: roleFacory
  * @author: Danny
- * @description: TODO
+ * @description: A base factory interface to generate roles
  * @date: 2022/11/3 21:01
  * @version: 1.0
  */

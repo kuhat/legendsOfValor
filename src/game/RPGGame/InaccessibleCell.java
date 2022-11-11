@@ -7,7 +7,7 @@ import game.role.heroes.Party;
  * @package: game.RPGGame
  * @className: InaccessibleCell
  * @author: Danny
- * @description: TODO
+ * @description: the cell that cannot be entered
  * @date: 2022/11/3 22:01
  * @version: 1.0
  */

@@ -7,7 +7,7 @@ import game.role.role;
  * @package: game.role.heroes
  * @className: Warrior
  * @author: Danny
- * @description: TODO
+ * @description: Warrior hero type
  * @date: 2022/11/3 20:59
  * @version: 1.0
  */

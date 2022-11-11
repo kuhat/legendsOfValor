@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @package: game.RPGGame
  * @className: RPGItem
  * @author: Danny
- * @description: TODO
+ * @description: base item class inherited by all the items
  * @date: 2022/11/3 21:44
  * @version: 1.0
  */

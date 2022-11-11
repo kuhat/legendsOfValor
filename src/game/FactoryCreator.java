@@ -5,7 +5,7 @@ package game;
  * @package: game
  * @className: Factory
  * @author: Danny
- * @description: TODO
+ * @description: Base factory creator interface
  * @date: 2022/11/3 21:11
  * @version: 1.0
  */

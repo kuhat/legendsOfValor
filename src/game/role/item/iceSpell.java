@@ -5,7 +5,7 @@ package game.role.item;
  * @package: game.role.item
  * @className: iceSpell
  * @author: Danny
- * @description: TODO
+ * @description: ice spell item
  * @date: 2022/11/3 21:50
  * @version: 1.0
  */

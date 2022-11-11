@@ -8,7 +8,7 @@ import game.role.item.Inventory;
  * @package: game.role
  * @className: buyable
  * @author: Danny
- * @description: TODO
+ * @description: Buyable interface which have common behaviors
  * @date: 2022/11/3 21:53
  * @version: 1.0
  */

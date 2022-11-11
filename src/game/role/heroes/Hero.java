@@ -10,7 +10,7 @@ import game.role.role;
  * @package: game.role.heroes
  * @className: Hero
  * @author: Danny
- * @description: TODO
+ * @description: Hero class inherited by all the heroes, which can attack and buy items
  * @date: 2022/11/3 18:33
  * @version: 1.0
  */

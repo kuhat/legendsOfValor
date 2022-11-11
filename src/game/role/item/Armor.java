@@ -9,7 +9,7 @@ import game.role.mountable;
  * @package: game.role.item
  * @className: Armor
  * @author: Danny
- * @description: TODO
+ * @description: armor item
  * @date: 2022/11/3 21:44
  * @version: 1.0
  */

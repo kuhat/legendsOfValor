@@ -5,7 +5,7 @@ package game.role.item;
  * @package: game.role.item
  * @className: fireSpell
  * @author: Danny
- * @description: TODO
+ * @description: fire spell item
  * @date: 2022/11/3 21:51
  * @version: 1.0
  */

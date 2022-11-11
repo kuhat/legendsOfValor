@@ -5,7 +5,7 @@ package game.role;
  * @package: game.role
  * @className: Sellable
  * @author: Danny
- * @description: TODO
+ * @description: items that have the same behavior: can be sold
  * @date: 2022/11/3 21:53
  * @version: 1.0
  */

@@ -7,7 +7,7 @@ import game.role.heroes.Party;
  * @package: game.boardGame
  * @className: Cell
  * @author: Danny
- * @description: TODO
+ * @description: Each cell in the game board
  * @date: 2022/11/3 18:25
  * @version: 1.0
  */

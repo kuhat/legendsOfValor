@@ -15,7 +15,7 @@ import java.util.Random;
  * @package: game.role.item
  * @className: itemFactory
  * @author: Danny
- * @description: TODO
+ * @description: Item factory to create different items
  * @date: 2022/11/7 10:50
  * @version: 1.0
  */

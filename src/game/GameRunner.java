@@ -14,9 +14,9 @@ import java.util.Scanner;
 /**
  * @projectName: monstersAndHerios
  * @package: game
- * @className: lengend
+ * @className: GameRunner
  * @author: Danny
- * @description: TODO
+ * @description: Running instance of the game
  * @date: 2022/11/3 20:45
  * @version: 1.0
  */

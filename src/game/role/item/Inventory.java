@@ -11,7 +11,7 @@ import java.util.List;
  * @package: game.role.item
  * @className: Inventory
  * @author: Danny
- * @description: TODO
+ * @description: inventory owned by hero
  * @date: 2022/11/3 21:55
  * @version: 1.0
  */

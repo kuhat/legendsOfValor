@@ -5,7 +5,7 @@ package game.role.heroes;
  * @package: game.role.heroes
  * @className: Sorceror
  * @author: Danny
- * @description: TODO
+ * @description: Sorceror hero type
  * @date: 2022/11/3 21:00
  * @version: 1.0
  */
