@@ -1,5 +1,5 @@
 import game.GameRunner;
-import game.GameState;
+import game.utils.audio;
 
 import java.util.Scanner;
 
@@ -14,6 +14,8 @@ import java.util.Scanner;
  */
 public class Game {
     public static void startGame() {
+
+        audio.playMusic(audio.GAME_INTRODUCTION_MUSIC, true);
         System.out.println("--------------------++++++++------------------");
         System.out.println("        Welcome to Monsters and Heroes!       ");
         System.out.println("--------------------++++++++------------------");
