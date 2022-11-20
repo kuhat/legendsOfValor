@@ -15,4 +15,8 @@ public class Nexus extends normalCell {
     public Nexus(String content) {
         super(content);
     }
+
+    public Nexus(String content, String type) {
+        super(content, type);
+    }
 }

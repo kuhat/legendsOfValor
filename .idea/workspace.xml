@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4399c6f5-6a81-40fd-8f23-ddbe102bbb40" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/game/role/places/Bush.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/role/places/Cave.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/role/places/Koulou.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/role/places/Nexus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/role/places/Plain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/places/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GameRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/RPGGame/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/utils/instructions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/utils/instructions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/InaccessibleCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/InaccessibleCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/normalCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/normalCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Bush.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Bush.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Cave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Cave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Koulou.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Koulou.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Nexus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Nexus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Plain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Plain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +96,7 @@
       <workItem from="1668276684753" duration="1324000" />
       <workItem from="1668279237063" duration="977000" />
       <workItem from="1668542190874" duration="2447000" />
-      <workItem from="1668971545612" duration="9636000" />
+      <workItem from="1668971545612" duration="15179000" />
     </task>
     <servers />
   </component>

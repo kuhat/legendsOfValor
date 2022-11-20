@@ -13,13 +13,20 @@ import game.role.heroes.Party;
  */
 public abstract class Cell {
 
+    /**
+     * The content inside the Cell
+     */
     protected String content;
 
     /**
-     * A type to distinguish inaccessible cell. Normal Cell and market Cell
+     * A type to distinguish Cell type: Bush, Plain, Koulou, Cave, Nexus
      */
     private String type;
 
+    /**
+     * type X stands for Inaccessible, M stands for Market
+     * @param content content inside the cell
+     */
     public Cell(String content) {
         this.content = content;
         if (content.equals("X")) type = "X";
@@ -27,8 +34,17 @@ public abstract class Cell {
         else type = " ";
     }
 
-    public String printCell() {
-        return "";
+    public Cell (String content, String type) {
+        this.content = content;
+        this.type = type;
+    }
+
+    public void printCell() {
+        for (int i = 0; i < 9; i ++) {
+            if (i == 0 || i == 4 || i == 8) System.out.print(type);
+            else if (i % 2 == 1) System.out.print(" ");
+            else  System.out.print("-");
+        }
     }
 
     public String getType(){

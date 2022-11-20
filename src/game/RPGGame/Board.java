@@ -45,6 +45,10 @@ public class Board {
         }
     }
 
+    public void setCell(int x, int y, Cell cell) {
+        grid[x][y] = cell;
+    }
+
     public int getSize() {
         return size;
     }

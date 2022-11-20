@@ -15,4 +15,8 @@ public class Cave extends normalCell {
     public Cave(String content) {
         super(content);
     }
+
+    public Cave(String content, String type) {
+        super(content, type);
+    }
 }

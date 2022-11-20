@@ -36,6 +36,10 @@ public class normalCell extends Cell {
         super(content);
     }
 
+    public normalCell(String content, String type) {
+        super(content, type);
+    }
+
     @Override
     public void enter(Party party) {
         if (Math.random() < 0.7) {

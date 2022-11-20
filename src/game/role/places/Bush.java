@@ -15,6 +15,8 @@ public class Bush extends normalCell {
     public Bush(String content) {
         super(content);
     }
-
+    public Bush(String content, String type) {
+        super(content, type);
+    }
 
 }

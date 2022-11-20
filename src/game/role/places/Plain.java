@@ -17,4 +17,8 @@ public class Plain extends normalCell {
         super(content);
     }
 
+    public Plain(String content, String type) {
+        super(content, type);
+    }
+
 }

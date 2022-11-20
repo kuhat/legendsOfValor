@@ -16,5 +16,7 @@ public class Koulou extends normalCell {
         super(content);
     }
 
-
+    public Koulou(String content, String type) {
+        super(content, type);
+    }
 }

@@ -18,6 +18,10 @@ public class InaccessibleCell extends Cell {
         super(content);
     }
 
+    public InaccessibleCell(String content, String type) {
+        super(content, type);
+    }
+
     @Override
     public void enter(Party party) {
         System.out.println("Inaccessible Cell! Cannot enter! ");
