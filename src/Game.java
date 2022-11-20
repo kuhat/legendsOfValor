@@ -21,5 +21,4 @@ public class Game {
         GameRunner gameRunner = new GameRunner(scanner, System.out);
         gameRunner.start();
     }
-
 }

@@ -74,42 +74,34 @@ public class GameRunner implements GameState {
      * Initialize the roles and board
      */
     private void initRoles() {
+        printStream.println("Here is your game board: ");
+        board.printBoard();
+        this.party = new Party();
+        // Initialize three hero on the three lanes
+        for (int i = 0; i <3; i++) {
+            initHero(i, party);
+        }
         String input = "";
         boolean strResult = false;
-
-        // Ask player to enter number of players
-        while (!strResult) {
-            input = getInput("Please enter the number of heros you want to player with: (1 ~ 3):");
-            strResult = (input != null && input.matches("[1-3]"));
-        }
-        strResult = false;
-        int numberOfPlayer = Integer.valueOf(input);
-
-        // Ask player to choose which hero to play
-        this.party = new Party();
-        for (int i = 0; i < numberOfPlayer; i++) {
-            while (!strResult) {
-                instructions.printHeroChoice(printStream);
-                input = getInput("");
-                strResult = (input != null && input.matches("[1-3]"));
-            }
-            strResult = false;
-            int kind = Integer.valueOf(input);
-            instructions.printHeroChoiceOutcome(kind, printStream, party);
-        }
         printStream.println("Your hero party of size " + party.getParty().size() + " is ready to battle! ");
 
-        // Ask player to enter the size of board
-        while (!strResult) {
-            input = getInput("Please enter the size of the Board: (6~8): ");
-            strResult = (input != null && input.matches("[6-8]"));
-        }
-
-        int size = Integer.valueOf(input);
-        printStream.println("Game Starts! Good Luck!");
-        this.board = new Board(size, party);
+        this.board = new Board(8, party);
         board.printBoard();
     }
+
+    private void initHero(int lane, Party party) {
+        printStream.println("Please choose your hero on the lane " + lane);
+        String input = "";
+        boolean strResult = false;
+        while (!strResult) {
+            instructions.printHeroChoice(printStream);
+            input = getInput("");
+            strResult = (input != null & input.matches("[1-3]]"));
+        }
+        int kind = Integer.valueOf(input);
+        instructions.printHeroChoiceOutcome(kind, printStream, party, lane);
+    }
+
 
     private void handleUserInput() {
         instructions.printStepInstruction(printStream);

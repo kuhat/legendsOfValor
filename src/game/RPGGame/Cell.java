@@ -27,6 +27,10 @@ public abstract class Cell {
         else type = " ";
     }
 
+    public String printCell() {
+        return "";
+    }
+
     public String getType(){
         return this.type;
     }

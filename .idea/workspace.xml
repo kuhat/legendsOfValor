@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4399c6f5-6a81-40fd-8f23-ddbe102bbb40" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/places/Bush.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/places/Cave.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/places/Koulou.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/places/Nexus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/role/places/Plain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/FactoryCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/FactoryCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GameRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/utils/instructions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/utils/instructions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -34,20 +38,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/zwh/coursework/BU/Sem1/CS611/CW3/CW3/Legends_Monsters_Heroes/monstersAndHerios",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "fileTemplates"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/zwh/coursework/BU/Sem1/CS611/CW4/examples/Deliverables-of-Legends-of-Valor-CS-611-OO&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main" />
@@ -86,7 +90,12 @@
       <workItem from="1668009190441" duration="9215000" />
       <workItem from="1668022965115" duration="15176000" />
       <workItem from="1668048103911" duration="8726000" />
-      <workItem from="1668090759991" duration="28148000" />
+      <workItem from="1668090759991" duration="28741000" />
+      <workItem from="1668126210637" duration="278000" />
+      <workItem from="1668276684753" duration="1324000" />
+      <workItem from="1668279237063" duration="977000" />
+      <workItem from="1668542190874" duration="2447000" />
+      <workItem from="1668971545612" duration="9636000" />
     </task>
     <servers />
   </component>
@@ -103,20 +112,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/game/role/attackable.java</url>
-          <line>3</line>
-          <properties class="game.role.attackable" method="attack">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
