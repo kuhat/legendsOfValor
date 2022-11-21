@@ -46,10 +46,23 @@ public class Map extends Board {
     }
 
     public void printMap() {
-        for (int i = 0; i < 8; i ++) {
-            for (int j = 0; j < 8; j++) {
-
+        for (int j = 0; j < 8; j++) {
+            for (int i = 0; i < 8; i ++) {
+                super.getCell(j, i).printFirstAndLast();
+                System.out.print("  ");
             }
+            System.out.println();
+            for (int i = 0; i < 8; i++) {
+                super.getCell(j, i).printContent();
+                System.out.print("  ");
+            }
+            System.out.println();
+            for (int i = 0; i < 8; i++) {
+                super.getCell(j, i).printFirstAndLast();
+                System.out.print("  ");
+            }
+            System.out.println();
+            System.out.println();
         }
     }
 

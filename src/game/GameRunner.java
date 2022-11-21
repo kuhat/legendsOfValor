@@ -5,6 +5,7 @@ import game.RPGGame.Cell;
 import game.RPGGame.RPGItem;
 import game.role.heroes.Hero;
 import game.role.heroes.Party;
+import game.role.places.Map;
 import game.role.role;
 import game.utils.instructions;
 
@@ -38,6 +39,8 @@ public class GameRunner implements GameState {
     public static final String BLUE = "\u001B[34m";
 
     private Board board;
+
+    private Map map;
 
     private Party party;
 
@@ -74,8 +77,6 @@ public class GameRunner implements GameState {
      * Initialize the roles and board
      */
     private void initRoles() {
-        printStream.println("Here is your game board: ");
-        board.printBoard();
         this.party = new Party();
         // Initialize three hero on the three lanes
         for (int i = 0; i <3; i++) {
@@ -84,9 +85,9 @@ public class GameRunner implements GameState {
         String input = "";
         boolean strResult = false;
         printStream.println("Your hero party of size " + party.getParty().size() + " is ready to battle! ");
-
-        this.board = new Board(8, party);
-        board.printBoard();
+        map = new Map(8, party);
+        printStream.println("Here is your game board: ");
+        map.printMap();
     }
 
     private void initHero(int lane, Party party) {
@@ -96,7 +97,7 @@ public class GameRunner implements GameState {
         while (!strResult) {
             instructions.printHeroChoice(printStream);
             input = getInput("");
-            strResult = (input != null & input.matches("[1-3]]"));
+            strResult = (input != null & input.matches("[1-3]"));
         }
         int kind = Integer.valueOf(input);
         instructions.printHeroChoiceOutcome(kind, printStream, party, lane);

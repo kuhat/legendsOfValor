@@ -1,3 +1,5 @@
+package game.utils;
+
 //This class sets the color in the game
 public class ConsoleColorsCodes {
 

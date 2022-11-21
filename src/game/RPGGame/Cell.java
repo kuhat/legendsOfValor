@@ -39,7 +39,13 @@ public abstract class Cell {
         this.type = type;
     }
 
-    public void printCell() {
+    public void printContent(){
+        System.out.print("|");
+        System.out.print(content);
+        System.out.print("|");
+    }
+
+    public void printFirstAndLast(){
         for (int i = 0; i < 9; i ++) {
             if (i == 0 || i == 4 || i == 8) System.out.print(type);
             else if (i % 2 == 1) System.out.print(" ");
