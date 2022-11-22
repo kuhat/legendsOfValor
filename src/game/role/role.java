@@ -52,6 +52,10 @@ public abstract class role implements attackable, Product {
         this.pos = new int[]{row, col};
     }
 
+    public int getLane(){
+        return pos[1] / 3;
+    }
+
     public int[] getPos() {
         return pos;
     }

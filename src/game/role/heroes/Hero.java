@@ -35,6 +35,8 @@ public abstract class Hero extends role implements attackable, Buyable {
     private Inventory inventory;
     private String heroType;
 
+    private int[] birthPlace;
+
     public Hero(String name,int mp, int Hp, int power, int defense, int level, int dodge, int agility, int dexterity,
                 int gold, int experience, String type) {
         super(name, Hp, power, defense, level, dodge, "Hero");
@@ -46,6 +48,14 @@ public abstract class Hero extends role implements attackable, Buyable {
         this.inventory = new Inventory();
         this.heroType = type;
         this.maxHP = Hp;
+    }
+
+    public int[] getBirthPlace() {
+        return birthPlace;
+    }
+
+    public void setBirthPlace(int i, int j) {
+        this.birthPlace = new int[]{i, j};
     }
 
     public String getHeroType() {

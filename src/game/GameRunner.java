@@ -5,6 +5,7 @@ import game.RPGGame.Cell;
 import game.RPGGame.RPGItem;
 import game.role.heroes.Hero;
 import game.role.heroes.Party;
+import game.role.monsters.MonsterFactory;
 import game.role.places.Map;
 import game.role.role;
 import game.utils.instructions;
@@ -42,7 +43,11 @@ public class GameRunner implements GameState {
 
     private Map map;
 
-    private Party party;
+    private Party HeroParty;
+
+    private Party MonsterParty;
+
+    private int numRounds;
 
     public GameRunner(Scanner scanner, PrintStream printStream) {
         this.scanner = scanner;
@@ -56,8 +61,15 @@ public class GameRunner implements GameState {
 
     @Override
     public void run() {
+        numRounds = 1;
         while (true) {
-            handleUserInput();
+            if(numRounds % 8 == 0) {
+                printStream.println("New monsters are generated!");
+                spawnMonsters(3);
+            }
+            printStream.println(RED + "========Round " + numRounds + " begins===========" + RESET);
+            playRound();
+            numRounds++;
         }
     }
 
@@ -71,25 +83,33 @@ public class GameRunner implements GameState {
     public void init() {
         instructions.printInitInstruction(this.printStream);
         initRoles();
+        instructions.printAllHeroesInfo(this.printStream, HeroParty);
     }
 
     /**
      * Initialize the roles and board
      */
     private void initRoles() {
-        this.party = new Party();
+        this.HeroParty = new Party();
+        this.MonsterParty = new Party();
         // Initialize three hero on the three lanes
         for (int i = 0; i <3; i++) {
-            initHero(i, party);
+            initHero(i, HeroParty);
         }
-        map = new Map(8, party);
+        map = new Map(8, HeroParty);
         // Initialize hero 1,2,3 on the map
         for (int i = 0; i < 3; i++) {
-            map.getCell(7, i * 3).setRole(party.getParty().get(i));
-            map.getCell(7, i * 3).setContent(map.getCell(7, i * 3).getRole().getCharacter() + "     ");
+            map.getCell(7, i * 3).setRole(HeroParty.getParty().get(i));
+            map.setContent(7, i * 3, map.getCell(7, i *3).getRole().getCharacter() + "     ");
         }
-        printStream.println("Your hero party of size " + party.getParty().size() + " is ready to battle! ");
-        printStream.println("Here is your game board: ");
+        spawnMonsters(3);
+        // Initialize Monster 1,2,3 on the map
+        for (int i = 0; i < 3; i++) {
+            map.getCell(0, i * 3 + 1).setRole(MonsterParty.getParty().get(i));
+            map.setContent(0, i * 3 + 1, "     " + map.getCell(0, i * 3 + 1).getRole().getCharacter());
+        }
+        printStream.println("Your hero party of size " + HeroParty.getParty().size() + " is ready to battle! ");
+        printStream.println("Here is your game map: ");
         map.printMap();
     }
 
@@ -104,6 +124,51 @@ public class GameRunner implements GameState {
         }
         int kind = Integer.valueOf(input);
         instructions.printHeroChoiceOutcome(kind, printStream, party, lane, map);
+    }
+
+    /**
+     * Create new monsters on each lane
+     * @param monsterNum number of monsters to create
+     */
+    private void spawnMonsters(int monsterNum) {
+        int maxLevel = 0;
+        for (int i = 0; i < HeroParty.getParty().size(); i++) {
+            maxLevel = Math.max(maxLevel, HeroParty.getParty().get(i).getLevel());
+        }
+        for (int i = 0; i < monsterNum; i++) {
+            role newMonster = (role) MonsterFactory.getInstance().creatProduct();
+            while (newMonster.getLevel() > maxLevel) newMonster = (role) MonsterFactory.getInstance().creatProduct();
+            newMonster.setPos(0, i * 3 + 1);
+            newMonster.setCharacter("M" + (i + 1));
+            MonsterParty.addMember(newMonster);
+        }
+    }
+
+    private void playRound() {
+        heroesAction();
+        monsterAction();
+    }
+
+    private void heroesAction() {
+        for (int i = 0; i < HeroParty.getParty().size(); i++) {
+            heroTakeAction(HeroParty.getParty().get(i));
+        }
+    }
+
+    private void monsterAction() {
+
+    }
+
+    private void heroTakeAction(role hero) {
+        String input = "";
+        Boolean strRes = false;
+        while (!strRes) {
+            instructions.printHeroChoices(printStream, hero);
+            input = getInput("");
+            strRes = (input != null && input.matches("[1-7]"));
+            if (!strRes) printStream.println("Please choose one number from 1 to 7!");
+        }
+
     }
 
 
@@ -128,7 +193,7 @@ public class GameRunner implements GameState {
      * @param input User input to judge: W, A, S, D
      */
     private void TeamMove(String input) {
-        int[] pos = this.party.getPosition();
+        int[] pos = this.HeroParty.getPosition();
         int newX = pos[0], newY = pos[1];
         Cell oldCell = board.getCell(pos[0], pos[1]);
         String type = oldCell.getType();
@@ -138,10 +203,10 @@ public class GameRunner implements GameState {
         else newY += 1;  // move right
         if (newX >= 0 && newX < board.getSize() && newY >= 0 && newY < board.getSize()) {
             Cell newCell = board.getCell(newX, newY);
-            newCell.enter(party);  // Party go to the new position
+            newCell.enter(HeroParty);  // Party go to the new position
             if (!newCell.getType().equals("X")) {
                 newCell.setContent("T");
-                party.setPosition(newX, newY);  // set the position of party
+                HeroParty.setPosition(newX, newY);  // set the position of party
                 oldCell.setContent(type);  // set the original type of the cell to the content
                 board.printBoard();
             }
@@ -151,7 +216,7 @@ public class GameRunner implements GameState {
     }
 
     private void showInventory() {
-        for (role hero: party.getParty()) {
+        for (role hero: HeroParty.getParty()) {
             System.out.println("Hero: " + BLUE  + hero.getName() + RESET+ ": ");
             System.out.println(((Hero)hero).toString());
             for (RPGItem item : ((Hero)hero).getInventory().getItems()) {

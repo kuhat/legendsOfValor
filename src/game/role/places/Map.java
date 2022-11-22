@@ -4,6 +4,9 @@ import game.RPGGame.Board;
 import game.RPGGame.Cell;
 import game.RPGGame.InaccessibleCell;
 import game.role.heroes.Party;
+import game.utils.ConsoleColorsCodes;
+
+import static game.utils.ConsoleColorsCodes.CYAN;
 
 /**
  * @projectName: monstersAndHeroes
@@ -45,6 +48,10 @@ public class Map extends Board {
         }
     }
 
+    public void setContent(int i, int j, String content) {
+        super.getCell(i,j).setContent(content);
+    }
+
     public void printMap() {
         // Each row of the map consists of eight Cells
         for (int j = 0; j < 8; j++) {
@@ -68,6 +75,7 @@ public class Map extends Board {
             System.out.println();
             System.out.println();
         }
+        System.out.println(CYAN + "    Lane 0                            Lane 1                            Lane 2" + ConsoleColorsCodes.RESET);
     }
 
 

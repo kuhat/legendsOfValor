@@ -4,11 +4,7 @@
     <list default="true" id="4399c6f5-6a81-40fd-8f23-ddbe102bbb40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GameRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/InaccessibleCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/InaccessibleCell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/MarketCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/MarketCell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/normalCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/normalCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/heroes/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/heroes/Hero.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/role/places/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/role/role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/utils/instructions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/utils/instructions.java" afterDir="false" />
@@ -99,7 +95,8 @@
       <workItem from="1668987317235" duration="206000" />
       <workItem from="1669000057378" duration="4069000" />
       <workItem from="1669083157930" duration="6817000" />
-      <workItem from="1669096613522" duration="3698000" />
+      <workItem from="1669096613522" duration="4053000" />
+      <workItem from="1669132586127" duration="6904000" />
     </task>
     <servers />
   </component>
