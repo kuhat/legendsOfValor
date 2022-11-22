@@ -33,16 +33,6 @@ public class Board {
         this.grid = new Cell[size][size];
         this.size = size;
         this.party = party;
-        int[] teamPos = generateTeamPos();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (i == teamPos[0] && j == teamPos[1]) {
-                    grid[i][j] = new normalCell("T");
-                } else {
-                    grid[i][j] = generateCell();
-                }
-            }
-        }
     }
 
     public void setCell(int x, int y, Cell cell) {
@@ -55,29 +45,6 @@ public class Board {
 
     public Cell getCell(int i, int j) {
         return grid[i][j];
-    }
-
-    /**
-     * initialize the position of team
-     */
-    private int[] generateTeamPos() {
-        Random random = new Random();
-        int col = random.nextInt(size);
-        int row = random.nextInt(size);
-        party.setPosition(row, col);
-        return new int[]{row, col};
-    }
-
-    /**
-     * 0.2 chance of Inaccessible cell
-     * 0.3 chance of Market Cell
-     * 0.5 chance of common cell
-     */
-    private Cell generateCell() {
-        double random = Math.random();
-        if (random < 0.2) return new InaccessibleCell("X");
-        else if (random < 0.5) return new MarketCell("M");
-        else return new normalCell(" ");
     }
 
     /**

@@ -46,17 +46,21 @@ public class Map extends Board {
     }
 
     public void printMap() {
+        // Each row of the map consists of eight Cells
         for (int j = 0; j < 8; j++) {
+            // Print the first line of the cell
             for (int i = 0; i < 8; i ++) {
                 super.getCell(j, i).printFirstAndLast();
                 System.out.print("  ");
             }
             System.out.println();
+            // print the content of the cell
             for (int i = 0; i < 8; i++) {
                 super.getCell(j, i).printContent();
                 System.out.print("  ");
             }
             System.out.println();
+            // print the last line of the cell
             for (int i = 0; i < 8; i++) {
                 super.getCell(j, i).printFirstAndLast();
                 System.out.print("  ");

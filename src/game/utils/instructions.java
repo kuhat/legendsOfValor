@@ -2,6 +2,7 @@ package game.utils;
 
 import game.Product;
 import game.role.heroes.*;
+import game.role.places.Map;
 
 import java.io.PrintStream;
 
@@ -67,19 +68,28 @@ public class instructions {
      * @param printStream printStream to print content
      * @param party Party to add the heroes
      */
-    public static void printHeroChoiceOutcome(int kind, PrintStream printStream, Party party, int lane) {
+    public static void printHeroChoiceOutcome(int kind, PrintStream printStream, Party party, int lane, Map map) {
         if (kind == 1) {
             printStream.println("You chose Warrior! ");
             Warrior warrior = (Warrior) party.addWarrior();
-            printStream.println("Warrior: " + BLUE + warrior.getName() + RESET +  " entered lane" +  lane + "!");
+            warrior.setPos(7, lane * 3);
+//            map.getCell(7, lane * 3).setRole(warrior);
+            warrior.setCharacter("H" + (lane + 1));
+            printStream.println("Warrior: " + BLUE + warrior.getName() + RESET +  " entered lane " +  lane + "!");
         } else if (kind == 2) {
             printStream.println("You chose Sorcerer! ");
             Sorceror sorceror = (Sorceror) party.addSorcerer();
-            printStream.println("Sorcerer: " + GREEN + sorceror.getName() + RESET + " entered lane" +  lane + "!");
+            sorceror.setPos(7, lane * 3);
+            sorceror.setCharacter("H" + (lane + 1));
+//            map.getCell(7, lane * 3).setRole(sorceror);
+            printStream.println("Sorcerer: " + GREEN + sorceror.getName() + RESET + " entered lane " +  lane + "!");
         } else if (kind == 3) {
             printStream.println("You chose Paladin! ");
             Paladin paladin = (Paladin) party.addPaladin();
-            printStream.println("Paladin: " + RED + paladin.getName() + RESET + " entered lane" +  lane + "!");
+            paladin.setPos(7, lane * 3);
+            paladin.setCharacter("H" + (lane + 1));
+//            map.getCell(7, lane * 3).setRole(paladin);
+            printStream.println("Paladin: " + RED + paladin.getName() + RESET + " entered lane " +  lane + "!");
         }
     }
 

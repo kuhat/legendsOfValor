@@ -20,15 +20,40 @@ public abstract class role implements attackable, Product {
 
     private boolean dead;
 
-    public role(String name, Prop prop) {
+    private int[] pos;
+
+    /**
+     * The unique identifier of the role
+     */
+    private String character;
+
+    public role(String name, Prop prop, int[] pos) {
         this.name = name;
         this.prop =prop;
+        this.pos = pos;
     }
 
     public role(String name, int Hp, int power, int defense, int level, int dodge, String type) {
         this.prop = new Prop(level, power, defense, dodge, Hp);
         this.name = name;
         this.type = type;
+        this.character = "  ";
+    }
+
+    public void setCharacter(String character) {
+        this.character = character;
+    }
+
+    public String getCharacter() {
+        return this.character;
+    }
+
+    public void setPos(int row, int col) {
+        this.pos = new int[]{row, col};
+    }
+
+    public int[] getPos() {
+        return pos;
     }
 
     public boolean isDead() {

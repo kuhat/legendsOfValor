@@ -1,6 +1,9 @@
 package game.RPGGame;
 
 import game.role.heroes.Party;
+import game.role.role;
+
+import static game.utils.ConsoleColorsCodes.*;
 
 /**
  * @projectName: monstersAndHerios
@@ -23,6 +26,8 @@ public abstract class Cell {
      */
     private String type;
 
+    private role role;
+
     /**
      * type X stands for Inaccessible, M stands for Market
      * @param content content inside the cell
@@ -39,9 +44,25 @@ public abstract class Cell {
         this.type = type;
     }
 
+    public void setRole(role role) {
+        this.role = role;
+    }
+
+    public role getRole() {
+        return this.role;
+    }
+
     public void printContent(){
         System.out.print("|");
-        System.out.print(content);
+        if (this.role != null) {
+            if (this.role.getType().equals("Hero")) {
+                System.out.print(BLUE_BOLD_BRIGHT + content + RESET);
+            } else {
+                System.out.print(GREEN_BOLD_BRIGHT + content + RESET);
+            }
+        } else {
+            System.out.print(RED + content + RESET);
+        }
         System.out.print("|");
     }
 
@@ -58,6 +79,8 @@ public abstract class Cell {
     }
 
     public abstract void enter(Party party);
+
+    public abstract void enter(role role);
 
     public String getContent() {
         return this.content;

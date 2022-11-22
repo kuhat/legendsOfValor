@@ -101,6 +101,11 @@ public class MarketCell extends Cell {
         act(party);
     }
 
+    @Override
+    public void enter(role role) {
+
+    }
+
     /**
      * The actions when party enters the market
      * @param party party to perform actions

@@ -52,6 +52,11 @@ public class normalCell extends Cell {
         }
     }
 
+    @Override
+    public void enter(role role) {
+
+    }
+
     /**
      * Create monster Num of random monsters
      *

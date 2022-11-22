@@ -1,6 +1,7 @@
 package game.RPGGame;
 
 import game.role.heroes.Party;
+import game.role.role;
 
 /**
  * @projectName: monstersAndHerios
@@ -25,5 +26,10 @@ public class InaccessibleCell extends Cell {
     @Override
     public void enter(Party party) {
         System.out.println("Inaccessible Cell! Cannot enter! ");
+    }
+
+    @Override
+    public void enter(game.role.role role) {
+
     }
 }

@@ -82,10 +82,13 @@ public class GameRunner implements GameState {
         for (int i = 0; i <3; i++) {
             initHero(i, party);
         }
-        String input = "";
-        boolean strResult = false;
-        printStream.println("Your hero party of size " + party.getParty().size() + " is ready to battle! ");
         map = new Map(8, party);
+        // Initialize hero 1,2,3 on the map
+        for (int i = 0; i < 3; i++) {
+            map.getCell(7, i * 3).setRole(party.getParty().get(i));
+            map.getCell(7, i * 3).setContent(map.getCell(7, i * 3).getRole().getCharacter() + "     ");
+        }
+        printStream.println("Your hero party of size " + party.getParty().size() + " is ready to battle! ");
         printStream.println("Here is your game board: ");
         map.printMap();
     }
@@ -100,7 +103,7 @@ public class GameRunner implements GameState {
             strResult = (input != null & input.matches("[1-3]"));
         }
         int kind = Integer.valueOf(input);
-        instructions.printHeroChoiceOutcome(kind, printStream, party, lane);
+        instructions.printHeroChoiceOutcome(kind, printStream, party, lane, map);
     }
 
 
