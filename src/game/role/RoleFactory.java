@@ -15,4 +15,6 @@ import game.Product;
 public abstract class RoleFactory implements FactoryCreator {
 
     public abstract Product creatProduct();
+
+    public abstract Product createProduct(int num);
 }

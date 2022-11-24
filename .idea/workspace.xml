@@ -4,9 +4,13 @@
     <list default="true" id="4399c6f5-6a81-40fd-8f23-ddbe102bbb40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GameRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/role/heroes/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/heroes/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/role/places/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/role/role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/MarketCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/MarketCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/RoleFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/RoleFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/heroes/HeroFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/heroes/HeroFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/item/ItemFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/item/ItemFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/item/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/item/Potion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/item/SpellFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/item/SpellFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Nexus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Nexus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/utils/instructions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/utils/instructions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +100,10 @@
       <workItem from="1669000057378" duration="4069000" />
       <workItem from="1669083157930" duration="6817000" />
       <workItem from="1669096613522" duration="4053000" />
-      <workItem from="1669132586127" duration="6904000" />
+      <workItem from="1669132586127" duration="8521000" />
+      <workItem from="1669182839513" duration="6130000" />
+      <workItem from="1669236070321" duration="2436000" />
+      <workItem from="1669252603486" duration="11101000" />
     </task>
     <servers />
   </component>

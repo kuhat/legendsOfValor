@@ -104,6 +104,22 @@ public class ItemFactory extends RoleFactory {
     }
 
     /**
+     * Create all the weapon
+     * @return all the weapon object from the file
+     */
+    public List<RPGItem> createWeapon() {
+        List<RPGItem> weaponList = new ArrayList<>();
+        for (int i = 0; i < weaponInfo.size(); i++) {
+            List<String> info = weaponInfo.get(i);
+            List<String> prop = new ArrayList<>();
+            for (String s: info) if (!s.equals("")) prop.add(s);
+            weaponList.add(new Weapon(prop.get(0), Integer.valueOf(prop.get(1).trim()), Integer.valueOf(prop.get(2)),
+                    Integer.valueOf(prop.get(3)), Integer.valueOf(prop.get(4))));
+        }
+        return weaponList;
+    }
+
+    /**
      * Create random Potion
      * @param num number of potion to add
      * @return potionList of size num. in which the affected attributes are HP, Power, Mana, agility, Dexterity, defense
@@ -131,6 +147,29 @@ public class ItemFactory extends RoleFactory {
     }
 
     /**
+     * Create all the Potion
+     * @return potionList of size num. in which the affected attributes are HP, Power, Mana, agility, Dexterity, defense
+     */
+    public List<RPGItem> createPotion() {
+        List<RPGItem> potionList = new ArrayList<>();
+        for (int i = 0; i < potionInfo.size(); i++) {
+            List<String> info = potionInfo.get(i);
+            List<String> prop = new ArrayList<>();
+            for (String s : info) if (!s.equals("")) prop.add(s);
+            int[] attAff = new int[6];
+            if (prop.get(4).equals("Health")) attAff[0] = Integer.valueOf(prop.get(3));
+            else if (prop.get(4).equals("Strength")) attAff[1] = Integer.valueOf(prop.get(3));
+            else if (prop.get(4).equals("Mana")) attAff[2] = Integer.valueOf(prop.get(3));
+            else if (prop.get(4).equals("Agility")) attAff[3] = Integer.valueOf(prop.get(3));
+            else if (prop.get(4).length() == 28) attAff[0] = attAff[1] = attAff[2] = attAff[3] = Integer.valueOf(prop.get(3));
+            else Arrays.fill(attAff, Integer.valueOf(prop.get(3)));
+            potionList.add(new Potion(prop.get(0), Integer.valueOf(prop.get(1).trim()), Integer.valueOf(prop.get(2)), attAff));
+        }
+        return potionList;
+    }
+
+
+    /**
      * Create Armor
      * @return armorList of random armor obj generated from the config file
      */
@@ -141,6 +180,21 @@ public class ItemFactory extends RoleFactory {
         for (int i = 0; i < num; i++) {
             int nextIdx = random.nextInt(num);
             List<String> info = armorInfo.get(nextIdx);
+            List<String> prop = new ArrayList<>();
+            for (String s: info) if (!s.equals("")) prop.add(s);
+            armorList.add(new Armor(prop.get(0), Integer.valueOf(prop.get(1).trim()), Integer.valueOf(prop.get(2)),
+                    Integer.valueOf(prop.get(3))));
+        }
+        return armorList;
+    }
+
+    /**
+     * Create all the armor
+     */
+    public List<RPGItem> createArmor() {
+        List<RPGItem> armorList = new ArrayList<>();
+        for (int i = 0; i < armorInfo.size(); i++) {
+            List<String> info = armorInfo.get(i);
             List<String> prop = new ArrayList<>();
             for (String s: info) if (!s.equals("")) prop.add(s);
             armorList.add(new Armor(prop.get(0), Integer.valueOf(prop.get(1).trim()), Integer.valueOf(prop.get(2)),
@@ -162,9 +216,28 @@ public class ItemFactory extends RoleFactory {
         return spells;
     }
 
+    /**
+     * create all the spells
+     * @return all the spells in the file
+     */
+    public List<RPGItem> createSpell() {
+        int num = SpellFactory.getInstance().getSpellNum();
+        List<RPGItem> spells = new ArrayList<>();
+        for (int i =0; i < num; i++) {
+            Product spell = SpellFactory.getInstance().createProduct(i);
+            spells.add((RPGItem) SpellFactory.getInstance().createProduct(i));
+        }
+        return spells;
+    }
+
 
     @Override
     public Product creatProduct() {
+        return null;
+    }
+
+    @Override
+    public Product createProduct(int num) {
         return null;
     }
 

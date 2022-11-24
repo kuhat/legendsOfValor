@@ -22,7 +22,7 @@ import static game.GameRunner.*;
  * @date: 2022/11/3 22:03
  * @version: 1.0
  */
-public class MarketCell extends Cell {
+public abstract class MarketCell extends Cell {
 
     List<RPGItem> armorList;
 
@@ -101,10 +101,7 @@ public class MarketCell extends Cell {
         act(party);
     }
 
-    @Override
-    public void enter(role role) {
-
-    }
+    public abstract void enter(role role);
 
     /**
      * The actions when party enters the market

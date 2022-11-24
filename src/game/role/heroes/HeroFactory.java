@@ -121,6 +121,11 @@ public class HeroFactory extends RoleFactory {
         else return creatPaladin();
     }
 
+    @Override
+    public Product createProduct(int num) {
+        return null;
+    }
+
     /**
      * Return an instance of HeroFactory
      * @return heroFactory if the instance is null

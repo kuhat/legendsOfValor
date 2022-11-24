@@ -1,7 +1,9 @@
 package game.utils;
 
 import game.Product;
+import game.RPGGame.RPGItem;
 import game.role.heroes.*;
+import game.role.item.*;
 import game.role.places.Map;
 import game.role.role;
 
@@ -26,6 +28,8 @@ import static game.utils.ConsoleColorsCodes.PURPLE;
  * @version: 1.0
  */
 public class instructions {
+
+    static PrintStream printStream;
 
     /**
      * First notification shown on the welcome stage
@@ -140,4 +144,98 @@ public class instructions {
             System.out.println("Hero " + party.getParty().get(i).getName() + " has " + ((Hero) party.getParty().get(i)).getGold());
         }
     }
+
+    public static void printMarketMsg(role role) {
+        System.out.println("Welcome to Nexus, do you want to buy or sell items? \n " +
+                "The hero's gold is " + ((Hero) role).getGold());
+    }
+
+    /**
+     * Print Spell list for the market
+     */
+    public static void printSpell() {
+        //        Name/cost/required level/damage/mana cost
+        List<RPGItem> spellList = ItemFactory.getInstance().createSpell();
+        System.out.println("Here is all the spells that are on sale: ");
+        printStream.format("%4s%20s%10s%10s%10s%15s", "ID", "Name", "cost", "required level", "damage", "mana cost");
+        printStream.println();
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
+        for (int i = 0 ; i < spellList.size(); i ++) {
+            RPGItem spell = spellList.get(i);
+            printStream.format("%4s%20s%10s%10s%10s%15s", i, spell.getName(), spell.getPrice(), spell.getLevel(),
+                    ((Spell) spell).getDamage(), ((Spell) spell).getManaCost());
+            printStream.println();
+        }
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
+    }
+
+    /**
+     * Print Armor list for the market
+     */
+    public static void printArmor() {
+        List<RPGItem> armorList = ItemFactory.getInstance().createArmor();
+        // Name/cost/required level/damage reduction
+        System.out.println("Here is all the armors that are on sale: ");
+        printStream.format("%4s%20s%10s%10s%10s", "ID", "Name", "cost", "required level", "damage reduction");
+        printStream.println();
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+        for (int i = 0 ; i < armorList.size(); i ++) {
+            RPGItem armor = armorList.get(i);
+            printStream.format("%4s%20s%10s%10s%10s", i, armor.getName(), armor.getPrice(), armor.getLevel(),
+                    ((Armor) armor).getReduction());
+            printStream.println();
+        }
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+
+    }
+
+    /**
+     * Print weapon list for the market
+     */
+    public static void printWeapon() {
+        //        Name/cost/level/damage/required hands
+        List<RPGItem> weaponList = ItemFactory.getInstance().createArmor();
+        System.out.println("Here are all the weapons that are on sale: ");
+        printStream.format("%4s%20s%10s%10s%10s%20s", "ID", "Name", "cost", "required level", "damage", "required hands");
+        printStream.println();
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+        for (int i = 0 ; i < weaponList.size(); i ++) {
+            RPGItem weapon = weaponList.get(i);
+            printStream.format("%4s%20s%10s%10s%10s%20s", i, weapon.getName(), weapon.getPrice(), weapon.getLevel(),
+                    ((Weapon) weapon).getDamage(), ((Weapon) weapon).getHands());
+            printStream.println();
+        }
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+    }
+
+    /**
+     * print potion list for the market
+     */
+    public static void printPotion() {
+        // Name/cost/required level/attribute increase/attribute affected
+        // props: String name, int Hp, int power, int defense, int level, int dodge, int agility, int dexterity, int gold, int experience
+        List<RPGItem> potionList = ItemFactory.getInstance().createPotion();
+        System.out.println("Here are all the weapons that are on sale: ");
+        printStream.format("%4s%20s%10s%10s%10s%20s", "ID", "Name", "cost", "required level", "attribute increase", "attribute affected");
+        printStream.println();
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+        for (int i = 0 ; i < potionList.size(); i ++) {
+            RPGItem potion = potionList.get(i);
+            printStream.format("%4s%20s%10s%10s%10s%20s", i, potion.getName(), potion.getPrice(), potion.getLevel(),
+                    ((Potion) potion).getAttr(), ((Potion) potion).getInc());
+            printStream.println();
+        }
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+
+
+    }
+
 }

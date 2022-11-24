@@ -49,6 +49,52 @@ public class SpellFactory extends RoleFactory {
         return info;
     }
 
+    public int getSpellNum() {
+        return iceInfo.size() + fireInfo.size() + lightningInfo.size();
+    }
+
+
+    /**
+     * Create the designated spell
+     * @param num the index of spell
+     * @return Spell at the specific position
+     */
+    @Override
+    public Product createProduct(int num) {
+        int size = iceInfo.size() + fireInfo.size() + lightningInfo.size();
+        int i = 0;
+        Product spell = null;
+        List<String> prop = new ArrayList<>();
+        while (i < size) {
+            if (i < iceInfo.size()) {
+                if (i == num) {
+                    for (String s : iceInfo.get(i)) if (!s.equals("")) prop.add(s);
+                    spell = new iceSpell(prop.get(0), Integer.valueOf(prop.get(1)), Integer.valueOf(prop.get(2)),
+                            Integer.valueOf(prop.get(3)), Integer.valueOf(prop.get(4)));
+                }
+            } else if (i < iceInfo.size() + fireInfo.size()) {
+                if (i == num) {
+                    int idx = i  - iceInfo.size();
+                    for (String s: fireInfo.get(idx)) if (!s.equals("")) prop.add(s);
+                    spell = new fireSpell(prop.get(0), Integer.valueOf(prop.get(1)), Integer.valueOf(prop.get(2)),
+                            Integer.valueOf(prop.get(3)), Integer.valueOf(prop.get(4)));
+                }
+            } else if (i == num) {
+                int idx = i - iceInfo.size() - fireInfo.size();
+                for (String s: fireInfo.get(idx)) if (!s.equals("")) prop.add(s);
+                spell = new lingtningSpell(prop.get(0), Integer.valueOf(prop.get(1)), Integer.valueOf(prop.get(2)),
+                        Integer.valueOf(prop.get(3)), Integer.valueOf(prop.get(4)));
+            }
+            i++;
+        }
+        return spell;
+    }
+
+
+    /**
+     * Create random product
+     * @return random spell from three files
+     */
     @Override
     public Product creatProduct() {
         int size = iceInfo.size() + fireInfo.size() + lightningInfo.size();

@@ -35,14 +35,18 @@ public class Potion extends RPGItem {
         return "Type: "+ "Potion, " + "name: " + super.getName() + " Increase amount: " + getInc() + " Affect Attribute: " + getAttr();
     }
 
-    private int getInc() {
+    /**
+     * Get the increased amount of potion
+     * @return increased amount
+     */
+    public int getInc() {
         for (int i = 0; i < 6; i++) {
             if(affectedAttr[i] != 0) return affectedAttr[i];
         }
         return 0;
     }
 
-    private String getAttr() {
+    public String getAttr() {
         for (int i = 1 ; i < affectedAttr.length; i ++) {
             if (affectedAttr[i] != affectedAttr[i - 1]) break;
             if (i == 5) return "All Health/Mana/Strength/Dexterity/Defense/Agility";

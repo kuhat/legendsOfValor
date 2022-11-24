@@ -160,6 +160,13 @@ public class GameRunner implements GameState {
     }
 
     private void heroTakeAction(role hero) {
+        // If the hero is at the Nexus, ask if the player wants to buy things
+        int heroX = hero.getPos()[0];
+        int heroY = hero.getPos()[1];
+        if (heroX == 7) {
+            // Hero enters Nexus
+            map.getCell(heroX, heroY).enter(hero);
+        }
         String input = "";
         Boolean strRes = false;
         while (!strRes) {
@@ -168,8 +175,69 @@ public class GameRunner implements GameState {
             strRes = (input != null && input.matches("[1-7]"));
             if (!strRes) printStream.println("Please choose one number from 1 to 7!");
         }
+        switch (input) {
+            case "1":  // attack
+               Attack();
+            case "2":  // cast spell
+                CastSpell();
+            case "3":  // change armor/weapon
+                ChangeMountables();
+            case "4": // use potion
+                UsePotion();
+            case "5": // move
+                Move();
+            case "6": // Teleport
+                Teleport();
+            case "7": // quit
+                System.out.println("Thanks for playing! ");
+                System.exit(0);
+        }
+    }
+
+    private void Attack() {
+        if (canAttack()){
+            heroAttack();
+        } else {
+            System.out.println("No monster is within attack range!");
+        }
+    }
+
+    private boolean canAttack() {
+        return true;
+    }
+
+    private void heroAttack() {
 
     }
+
+    private void CastSpell() {
+        if (canAttack()) {
+            heroCastSpell();
+        } else{
+            System.out.println("No monster is within attack range!");
+        }
+    }
+
+    private void heroCastSpell() {
+
+    }
+
+    private void ChangeMountables() {
+
+    }
+
+    private void UsePotion() {
+
+    }
+
+    private void Move() {
+
+    }
+
+    private void Teleport() {
+
+    }
+
 
 
     private void handleUserInput() {
