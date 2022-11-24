@@ -109,6 +109,11 @@ public class MonsterFactory extends RoleFactory {
         else return createSpirit();
     }
 
+    @Override
+    public Product createProduct(int num) {
+        return null;
+    }
+
     /**
      * Return an instance of MonsterFactory
      *

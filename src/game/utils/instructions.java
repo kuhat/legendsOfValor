@@ -17,6 +17,7 @@ import static game.GameRunner.GREEN;
 import static game.GameRunner.RED;
 import static game.GameRunner.RESET;
 import static game.utils.ConsoleColorsCodes.PURPLE;
+import static game.utils.ConsoleColorsCodes.YELLOW_BOLD_BRIGHT;
 
 /**
  * @projectName: monstersAndHeroes
@@ -29,7 +30,7 @@ import static game.utils.ConsoleColorsCodes.PURPLE;
  */
 public class instructions {
 
-    static PrintStream printStream;
+    static PrintStream printStream = new PrintStream(System.out);
 
     /**
      * First notification shown on the welcome stage
@@ -159,16 +160,14 @@ public class instructions {
         System.out.println("Here is all the spells that are on sale: ");
         printStream.format("%4s%20s%10s%10s%10s%15s", "ID", "Name", "cost", "required level", "damage", "mana cost");
         printStream.println();
-        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
-                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
+        printStream.println(GREEN + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
         for (int i = 0 ; i < spellList.size(); i ++) {
             RPGItem spell = spellList.get(i);
             printStream.format("%4s%20s%10s%10s%10s%15s", i, spell.getName(), spell.getPrice(), spell.getLevel(),
                     ((Spell) spell).getDamage(), ((Spell) spell).getManaCost());
             printStream.println();
         }
-        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
-                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
+        printStream.println(GREEN + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
     }
 
     /**
@@ -178,18 +177,16 @@ public class instructions {
         List<RPGItem> armorList = ItemFactory.getInstance().createArmor();
         // Name/cost/required level/damage reduction
         System.out.println("Here is all the armors that are on sale: ");
-        printStream.format("%4s%20s%10s%10s%10s", "ID", "Name", "cost", "required level", "damage reduction");
+        printStream.format("%4s%20s%10s%20s%20s", "ID", "Name", "cost", "required level", "damage reduction");
         printStream.println();
-        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
-                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
         for (int i = 0 ; i < armorList.size(); i ++) {
             RPGItem armor = armorList.get(i);
-            printStream.format("%4s%20s%10s%10s%10s", i, armor.getName(), armor.getPrice(), armor.getLevel(),
+            printStream.format("%4s%20s%10s%20s%20s", i, armor.getName(), armor.getPrice(), armor.getLevel(),
                     ((Armor) armor).getReduction());
             printStream.println();
         }
-        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
-                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
 
     }
 
@@ -198,20 +195,18 @@ public class instructions {
      */
     public static void printWeapon() {
         //        Name/cost/level/damage/required hands
-        List<RPGItem> weaponList = ItemFactory.getInstance().createArmor();
+        List<RPGItem> weaponList = ItemFactory.getInstance().createWeapon();
         System.out.println("Here are all the weapons that are on sale: ");
         printStream.format("%4s%20s%10s%10s%10s%20s", "ID", "Name", "cost", "required level", "damage", "required hands");
         printStream.println();
-        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
-                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+        printStream.println(BLUE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
         for (int i = 0 ; i < weaponList.size(); i ++) {
             RPGItem weapon = weaponList.get(i);
             printStream.format("%4s%20s%10s%10s%10s%20s", i, weapon.getName(), weapon.getPrice(), weapon.getLevel(),
                     ((Weapon) weapon).getDamage(), ((Weapon) weapon).getHands());
             printStream.println();
         }
-        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
-                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+        printStream.println(BLUE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
     }
 
     /**
@@ -222,18 +217,18 @@ public class instructions {
         // props: String name, int Hp, int power, int defense, int level, int dodge, int agility, int dexterity, int gold, int experience
         List<RPGItem> potionList = ItemFactory.getInstance().createPotion();
         System.out.println("Here are all the weapons that are on sale: ");
-        printStream.format("%4s%20s%10s%10s%10s%20s", "ID", "Name", "cost", "required level", "attribute increase", "attribute affected");
+        printStream.format("%4s%20s%10s%20s%20s%55s", "ID", "Name", "cost", "required level", "attribute increase", "attribute affected");
         printStream.println();
-        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
-                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+        printStream.println(YELLOW_BOLD_BRIGHT + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
         for (int i = 0 ; i < potionList.size(); i ++) {
             RPGItem potion = potionList.get(i);
-            printStream.format("%4s%20s%10s%10s%10s%20s", i, potion.getName(), potion.getPrice(), potion.getLevel(),
-                    ((Potion) potion).getAttr(), ((Potion) potion).getInc());
+            printStream.format("%4s%20s%10s%20s%20s%55s", i, potion.getName(), potion.getPrice(), potion.getLevel(),
+                     ((Potion) potion).getInc(), ((Potion) potion).getAttr());
             printStream.println();
         }
-        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
-                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+        printStream.println(YELLOW_BOLD_BRIGHT + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
 
 
     }
