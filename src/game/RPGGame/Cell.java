@@ -52,6 +52,17 @@ public abstract class Cell {
         return this.role;
     }
 
+    public boolean hasHero() {
+        return this.role != null && !this.role.getType().equals("Monster");
+    }
+
+    public boolean hasMonster() {
+        return this.role != null && this.role.getType().equals("Monster");
+    }
+
+    /**
+     * Print the content of the cell
+     */
     public void printContent(){
         System.out.print("|");
         if (this.role != null) {
@@ -66,6 +77,9 @@ public abstract class Cell {
         System.out.print("|");
     }
 
+    /**
+     * Print the first row and the last row of the cell
+     */
     public void printFirstAndLast(){
         for (int i = 0; i < 9; i ++) {
             if (i == 0 || i == 4 || i == 8) System.out.print(type);

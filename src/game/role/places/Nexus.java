@@ -1,9 +1,17 @@
 package game.role.places;
 
 import game.GameRunner;
+import game.RPGGame.InaccessibleCell;
+import game.RPGGame.RPGItem;
 import game.RPGGame.normalCell;
+import game.role.heroes.Hero;
+import game.role.item.ItemFactory;
 import game.role.role;
 import game.utils.instructions;
+
+import java.util.List;
+
+import static game.GameRunner.getInput;
 
 /**
  * @projectName: monstersAndHeroes
@@ -41,7 +49,7 @@ public class Nexus extends normalCell {
             String input = "";
             boolean strResult = false;
             while (!strResult) {
-                input = GameRunner.getInput("You have chance to buy or sell items on Nexus for Hero: "+ role.getName()+ "\n" +
+                input = getInput("You have chance to buy or sell items on Nexus for Hero: "+ role.getName()+ "\n" +
                         "1: Buy \n" +
                         "2: Sell \n" +
                         "0: Quit");
@@ -50,10 +58,10 @@ public class Nexus extends normalCell {
             }
             if (input.equals("1")) {
                 System.out.println("You chose to buy items");
-                buyItem();
+                buyItem(role);
             } else if (input.equals("2")) {
                 System.out.println("You chose to sell items");
-                sellItem();
+                sellItem(role);
             } else {
                 System.out.println("You chose to quit, good luck!");
                 break;
@@ -61,11 +69,11 @@ public class Nexus extends normalCell {
         }
     }
 
-    private void buyItem() {
+    private void buyItem(role role) {
         String input = "";
         boolean strResult = false;
         while (!strResult) {
-            input = GameRunner.getInput("Please choose the kind of item to buy: \n" +
+            input = getInput("Please choose the kind of item to buy: \n" +
                     " 1: Weapon \n" +
                     " 2: Armor \n" +
                     " 3: Potion \n" +
@@ -73,15 +81,66 @@ public class Nexus extends normalCell {
             strResult = (input != null && input.matches("[1-4]"));
             if (!strResult) System.out.println("Please enter valid choice!");
         }
-        if (input.equals("1")) instructions.printWeapon();
-        else if (input.equals("2")) instructions.printArmor();
-        else if (input.equals("3")) instructions.printPotion();
-        else instructions.printSpell();
-        // Player enter choice
+        if (input.equals("1")) {
+            instructions.printWeapon();
+            buyWeapon(role);
+        }
+        else if (input.equals("2")) {
+            instructions.printArmor();
+            buyArmor();
+        }
+        else if (input.equals("3")) {
+            instructions.printPotion();
+            buyPotion();
+        }
+        else {
+            instructions.printSpell();
+            buySpell();
+        }
     }
 
-    private void sellItem() {
+    private void buyWeapon(role role){
+        List<RPGItem> weaponList = ItemFactory.getInstance().createWeapon();
+        String input = "";
+        boolean strRes = false;
+        while (!strRes) {
+            input = getInput("Please choose which weapon to buy:");
+            strRes = (input != null && checkDigit(input) && (Integer.parseInt(input) >= 0
+                    || Integer.parseInt(input) < weaponList.size()));
+            if (!strRes) System.out.println("Please enter digit between 0 and " + (weaponList.size() - 1));
+        }
+        RPGItem item = weaponList.get(Integer.parseInt(input));
+        if (((Hero)role).getGold() < item.getPrice()) {
+            System.out.println("Hero do not have enough money to buy this weapon!");
+        } else {
+            ((Hero) role).getInventory().addItem(weaponList.get(Integer.parseInt(input)));
+            ((Hero) role).setMoney(((Hero)role).getMoney() - item.getPrice());
+            System.out.println("Transaction success! Current money: " + ((Hero) role).getGold());
+        }
 
+    }
+
+    private void buyArmor(){
+
+    }
+
+    private void buyPotion() {
+
+    }
+
+    private void buySpell() {
+
+    }
+
+    private void sellItem(role role) {
+
+    }
+
+    private boolean checkDigit(String input){
+        for (char c: input.toCharArray()) {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
     }
 
 }

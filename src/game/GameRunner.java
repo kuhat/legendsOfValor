@@ -5,6 +5,7 @@ import game.RPGGame.Cell;
 import game.RPGGame.RPGItem;
 import game.role.heroes.Hero;
 import game.role.heroes.Party;
+import game.role.monsters.Monster;
 import game.role.monsters.MonsterFactory;
 import game.role.places.Map;
 import game.role.role;
@@ -56,13 +57,19 @@ public class GameRunner implements GameState {
 
     @Override
     public boolean isOver() {
+        for (role hero : HeroParty.getParty()) {
+            if (hero.getPos()[0] == 0) return true;
+        }
+        for (role monster: MonsterParty.getParty()) {
+            if (monster.getPos()[0] == 7) return true;
+        }
         return false;
     }
 
     @Override
     public void run() {
         numRounds = 1;
-        while (true) {
+        while (!isOver()) {
             if(numRounds % 8 == 0) {
                 printStream.println("New monsters are generated!");
                 spawnMonsters(3);
@@ -139,7 +146,7 @@ public class GameRunner implements GameState {
             role newMonster = (role) MonsterFactory.getInstance().creatProduct();
             while (newMonster.getLevel() > maxLevel) newMonster = (role) MonsterFactory.getInstance().creatProduct();
             newMonster.setPos(0, i * 3 + 1);
-            newMonster.setCharacter("M" + (i + 1));
+            newMonster.setCharacter("M" + ((numRounds / 8) + i + 1));
             MonsterParty.addMember(newMonster);
         }
     }
@@ -156,7 +163,9 @@ public class GameRunner implements GameState {
     }
 
     private void monsterAction() {
-
+        for (int i = 0; i < MonsterParty.getParty().size(); i ++) {
+            MonsterTakeAction(MonsterParty.getParty().get(i));
+        }
     }
 
     private void heroTakeAction(role hero) {
@@ -172,14 +181,14 @@ public class GameRunner implements GameState {
         while (!strRes) {
             instructions.printHeroChoices(printStream, hero);
             input = getInput("");
-            strRes = (input != null && input.matches("[1-7]"));
-            if (!strRes) printStream.println("Please choose one number from 1 to 7!");
+            strRes = (input != null && input.matches("[1-8]"));
+            if (!strRes) printStream.println("Please choose one number from 1 to 8!");
         }
         switch (input) {
             case "1":  // attack
-               Attack();
+               Attack(hero);
             case "2":  // cast spell
-                CastSpell();
+                CastSpell(hero);
             case "3":  // change armor/weapon
                 ChangeMountables();
             case "4": // use potion
@@ -188,30 +197,36 @@ public class GameRunner implements GameState {
                 Move();
             case "6": // Teleport
                 Teleport();
-            case "7": // quit
+            case "7":
+                recall();
+            case "8": // quit
                 System.out.println("Thanks for playing! ");
                 System.exit(0);
         }
     }
 
-    private void Attack() {
-        if (canAttack()){
+    private void Attack(role hero) {
+        if (canAttack(hero)){
             heroAttack();
         } else {
             System.out.println("No monster is within attack range!");
         }
     }
 
-    private boolean canAttack() {
-        return true;
+    private boolean canAttack(role hero) {
+        int x = hero.getPos()[0], y = hero.getPos()[1];
+        boolean res = map.getCell(Math.max(0, x - 1), Math.max(0, y - 1)).hasMonster() || map.getCell(Math.max(0, x - 1), y).hasMonster() || map.getCell(Math.max(0, x - 1), Math.min(7, y + 1)).hasMonster()
+                || map.getCell(x, Math.max(0, y - 1)).hasMonster() || map.getCell(x,y).hasMonster() || map.getCell(x, Math.min(7, y + 1)).hasMonster() ||
+                map.getCell(Math.min(7, x + 1), Math.max(0, y - 1)).hasMonster() || map.getCell(Math.min(7, x + 1), y).hasMonster() || map.getCell(Math.min(7, x + 1), Math.min(7, y + 1)).hasMonster();
+        return res;
     }
 
     private void heroAttack() {
 
     }
 
-    private void CastSpell() {
-        if (canAttack()) {
+    private void CastSpell(role hero) {
+        if (canAttack(hero)) {
             heroCastSpell();
         } else{
             System.out.println("No monster is within attack range!");
@@ -234,11 +249,31 @@ public class GameRunner implements GameState {
 
     }
 
+    private void recall() {
+        
+    }
+
     private void Teleport() {
 
     }
 
 
+    private void MonsterTakeAction(role monster) {
+
+    }
+
+    private void heroWin() {
+        System.out.println("A hero has successfully entered the Nexus of Monster! \n" +
+                "You won the game!");
+        getInput("Press any key to end the game.");
+        System.exit(0);
+    }
+
+    private void monsterWin() {
+        System.out.println("A Monster has successfully entered the Nexus of Hero! \n" +
+                "You lose the game!");
+        getInput("Press any key to end the game.");
+    }
 
     private void handleUserInput() {
         instructions.printStepInstruction(printStream);
