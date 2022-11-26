@@ -2,6 +2,7 @@ package game;
 
 import game.RPGGame.Board;
 import game.RPGGame.Cell;
+import game.RPGGame.InaccessibleCell;
 import game.RPGGame.RPGItem;
 import game.role.heroes.Hero;
 import game.role.heroes.Party;
@@ -9,9 +10,11 @@ import game.role.monsters.Monster;
 import game.role.monsters.MonsterFactory;
 import game.role.places.Map;
 import game.role.role;
+import game.utils.ConsoleColorsCodes;
 import game.utils.instructions;
 
 import java.io.PrintStream;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -194,11 +197,11 @@ public class GameRunner implements GameState {
             case "4": // use potion
                 UsePotion();
             case "5": // move
-                Move();
+                Move(hero);
             case "6": // Teleport
                 Teleport();
             case "7":
-                recall();
+                recall(hero);
             case "8": // quit
                 System.out.println("Thanks for playing! ");
                 System.exit(0);
@@ -245,12 +248,167 @@ public class GameRunner implements GameState {
 
     }
 
-    private void Move() {
-
+    private void Move(role hero) {
+        getCoordinates(hero);
     }
 
-    private void recall() {
-        
+    private int selectDirection() {
+
+        System.out.println("1. To Move Up");
+        System.out.println("2. To Move Down");
+        System.out.println("3. To Move Left");
+        System.out.println("4. To Move Right");
+
+        int direction;
+
+        String input = "";
+        boolean strRes = false;
+        while (!strRes) {
+            input = getInput("Please enter your choice: ");
+            strRes = (input != null && input.matches("[1-4]"));
+            if (!strRes) printStream.println("Invalid input, please input 1-4.");
+        }
+        direction = Integer.valueOf(input);
+
+
+//        do{
+//            System.out.println("Please enter your move as below:");
+//            Scanner s = new Scanner(System.in);
+//            try{
+//                direction = s.nextInt();
+//            }
+//            catch(InputMismatchException e){
+//                direction = 0;
+//            }
+//        }while(direction<1 || direction>4);
+        return direction;
+    }
+
+    private int[] getDirectionCoordinates(int direction, role hero){
+        int newRow=0;
+        int newCol=0;
+        int[] newTile = new int[2];
+        //Move Up
+        if (direction==1){
+            newRow= hero.getPos()[0]-1;
+            newCol=hero.getPos()[1];
+        }
+        //Move Down
+        if(direction==2){
+            newRow=hero.getPos()[0]+1;
+            newCol=hero.getPos()[1];
+        }
+        //Move Left
+        if(direction==3){
+            newRow=hero.getPos()[0];
+            newCol=hero.getPos()[1]-1;
+        }
+        //Move Right
+        if(direction==4){
+            newRow=hero.getPos()[0];
+            newCol=hero.getPos()[1]+1;
+        }
+
+        newTile[0]= newRow;
+        newTile[1]= newCol;
+
+        return newTile;
+    }
+
+    private boolean isValidateMove(int i, int j){
+
+        if(i>=0 && i<8 && j>=0 && j<8){
+            if (i == 2 || i == 5) {
+                System.out.println(ConsoleColorsCodes.RED+"You are trying to access Inaccessible area!!"+ConsoleColorsCodes.RESET);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else {
+            System.out.println(ConsoleColorsCodes.RED+"Invalid move"+ConsoleColorsCodes.RESET);
+            return false;
+        }
+    }
+
+    private int getMonsterPosition(role hero){
+        int heroCol;
+        int monsterPositionRow = 0;
+        heroCol = hero.getPos()[1];
+        if(heroCol==0 || heroCol==3 || heroCol==6){
+            for (int i=0;i<8;i++){
+                for(int j=heroCol;j<=(heroCol+1);j++){
+                    Cell cell = map.getCell(i,j);
+                    if(cell.hasMonster()){
+                        monsterPositionRow=i;
+                    }
+                }
+            }
+        }
+        else{
+            for (int i=0;i<8;i++){
+                for(int j=(heroCol-1);j<=heroCol;j++){
+                    Cell cell = map.getCell(i,j);
+                    if(cell.hasMonster()){
+                        monsterPositionRow=i;
+                    }
+                }
+            }
+        }
+        return monsterPositionRow;
+    }
+
+    private boolean isCellContentEmpty(int i, int j){
+        String cellContent;
+        cellContent = map.getCell(i,j).getContent();
+        if(cellContent.equalsIgnoreCase("       ")){
+            return true;
+        }
+        else{
+            System.out.println(ConsoleColorsCodes.RED+"You are trying to access the Cell which is already occupied."+ConsoleColorsCodes.RESET);
+            return false;
+        }
+    }
+
+    private void makeMove(int i, int j, role hero){
+        hero.setPos(i,j);
+    }
+
+    private void getCoordinates(role hero){
+        int currentRow = hero.getPos()[0];
+        int currentCol = hero.getPos()[1];
+        int newTile[];
+        int monsterExploredRow = getMonsterPosition(hero);
+        boolean checkValidity;
+        boolean checkValidity2;
+        boolean checkMonsterSurpassed = true;
+        boolean checkCellValidity;
+        do {
+            System.out.println("HEroName"+hero.getName());
+            int direction = selectDirection();
+            newTile=getDirectionCoordinates(direction, hero);
+            checkValidity = isValidateMove(currentRow, currentCol);
+            checkValidity2 = isValidateMove(newTile[0], newTile[1]);
+            checkCellValidity = isCellContentEmpty(newTile[0], newTile[1]);
+
+            if(monsterExploredRow<=newTile[0]){
+                checkMonsterSurpassed = false;
+            }
+            else {
+                System.out.println(ConsoleColorsCodes.RED+"You cannot surpass the monster."+ConsoleColorsCodes.RESET);
+            }
+        }
+        while(!checkValidity || !checkValidity2 || !checkCellValidity || !checkMonsterSurpassed);
+        makeMove(newTile[0], newTile[1], hero);
+    }
+
+    private void recall(role hero) {
+
+        int [] birthPlace =((Hero) hero).getBirthPlace();
+        hero.setPos(birthPlace[0],birthPlace[1]);
+        map.setContent(birthPlace[0], birthPlace[1], hero.getCharacter()+"     ");
     }
 
     private void Teleport() {
