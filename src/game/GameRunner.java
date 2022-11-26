@@ -198,7 +198,7 @@ public class GameRunner implements GameState {
             case "6": // Teleport
                 Teleport();
             case "7":
-                recall();
+                recall(hero);
             case "8": // quit
                 System.out.println("Thanks for playing! ");
                 System.exit(0);
@@ -249,8 +249,8 @@ public class GameRunner implements GameState {
 
     }
 
-    private void recall() {
-        
+    private void recall(role hero) {
+
     }
 
     private void Teleport() {

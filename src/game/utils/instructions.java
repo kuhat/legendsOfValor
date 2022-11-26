@@ -1,6 +1,5 @@
 package game.utils;
 
-import game.Product;
 import game.RPGGame.RPGItem;
 import game.role.heroes.*;
 import game.role.item.*;
@@ -8,14 +7,9 @@ import game.role.places.Map;
 import game.role.role;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static game.GameRunner.BLUE;
-import static game.GameRunner.GREEN;
-import static game.GameRunner.RED;
-import static game.GameRunner.RESET;
+import static game.GameRunner.*;
 import static game.utils.ConsoleColorsCodes.PURPLE;
 import static game.utils.ConsoleColorsCodes.YELLOW_BOLD_BRIGHT;
 
@@ -229,8 +223,88 @@ public class instructions {
         }
         printStream.println(YELLOW_BOLD_BRIGHT + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+    }
 
+    /**
+     * Print the weapon in hero's inventory
+     * @param inventory hero's inventory
+     */
+    public static void printInventoryWeapon(Inventory inventory) {
+            List<Weapon> weaponList = inventory.getWeapon();
+            System.out.println("Here are all the weapons that are in the hero's inventory: ");
+            printStream.format("%4s%20s%10s%10s%10s%20s", "ID", "Name", "cost", "required level", "damage", "required hands");
+            printStream.println();
+            printStream.println(BLUE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+            for (int i = 0 ; i < weaponList.size(); i ++) {
+                RPGItem weapon = weaponList.get(i);
+                printStream.format("%4s%20s%10s%10s%10s%20s", i, weapon.getName(), weapon.getPrice(), weapon.getLevel(),
+                        ((Weapon) weapon).getDamage(), ((Weapon) weapon).getHands());
+                printStream.println();
+            }
+            printStream.println(BLUE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+    }
+
+    /**
+     * print the armors in hero's inventory
+     * @param inventory hero's inventory
+     */
+    public static void printInventoryArmor(Inventory inventory) {
+        List<Armor> armorList = inventory.getArmor();
+        // Name/cost/required level/damage reduction
+        System.out.println("Here is all the armors that are in the hero's inventory: ");
+        printStream.format("%4s%20s%10s%20s%20s", "ID", "Name", "cost", "required level", "damage reduction");
+        printStream.println();
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
+        for (int i = 0 ; i < armorList.size(); i ++) {
+            Armor armor = armorList.get(i);
+            printStream.format("%4s%20s%10s%20s%20s", i, armor.getName(), armor.getPrice(), armor.getLevel(),
+                    armor.getReduction());
+            printStream.println();
+        }
+        printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
 
     }
+
+    /**
+     * print the Spells in hero's inventory
+     * @param inventory hero's inventory
+     */
+    public static void printInventorySpell(Inventory inventory) {
+        List<Spell> spellList = inventory.getSpell();
+        System.out.println("Here is all the spells that are on sale: ");
+        printStream.format("%4s%20s%10s%10s%10s%15s", "ID", "Name", "cost", "required level", "damage", "mana cost");
+        printStream.println();
+        printStream.println(GREEN + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
+        for (int i = 0 ; i < spellList.size(); i ++) {
+            Spell spell = spellList.get(i);
+            printStream.format("%4s%20s%10s%10s%10s%15s", i, spell.getName(), spell.getPrice(), spell.getLevel(),
+                    spell.getDamage(), spell.getManaCost());
+            printStream.println();
+        }
+        printStream.println(GREEN + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
+    }
+
+    /**
+     * print the Potions in hero's inventory
+     * @param inventory hero's inventory
+     */
+    public static void printInventoryPotion(Inventory inventory) {
+        List<Potion> potionList = inventory.getPotion();
+        System.out.println("Here are all the weapons that are in the hero's inventory: ");
+        printStream.format("%4s%20s%10s%20s%20s%55s", "ID", "Name", "cost", "required level", "attribute increase", "attribute affected");
+        printStream.println();
+        printStream.println(YELLOW_BOLD_BRIGHT + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+        for (int i = 0 ; i < potionList.size(); i ++) {
+            Potion potion = potionList.get(i);
+            printStream.format("%4s%20s%10s%20s%20s%55s", i, potion.getName(), potion.getPrice(), potion.getLevel(),
+                    potion.getInc(), potion.getAttr());
+            printStream.println();
+        }
+        printStream.println(YELLOW_BOLD_BRIGHT + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + RESET);
+    }
+
+
 
 }
