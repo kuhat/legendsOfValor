@@ -409,6 +409,7 @@ public class GameRunner implements GameState {
         int [] birthPlace =((Hero) hero).getBirthPlace();
         hero.setPos(birthPlace[0],birthPlace[1]);
         map.setContent(birthPlace[0], birthPlace[1], hero.getCharacter()+"     ");
+
     }
 
     private void Teleport() {

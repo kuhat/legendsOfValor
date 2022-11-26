@@ -40,6 +40,15 @@ public class Inventory {
     }
 
     public boolean removeItem(RPGItem item) {
+        if (item.getType().equals("Weapon")) {
+            return weaponList.remove(item);
+        } else if (item.getType().equals("Armor")) {
+            return armorList.remove(item);
+        } else if (item.getType().equals("Potion")) {
+            return potionList.remove(item);
+        } else if (item.getType().equals("Spell")) {
+            return spellList.remove(item);
+        }
         return items.remove(item);
     }
 
@@ -49,15 +58,19 @@ public class Inventory {
 
     public void addItem(RPGItem item) {
         items.add(item);
+        if (item.getType().equals("Spell")) {
+            spellList.add((Spell)item);
+        } else if (item.getType().equals("Weapon")) {
+            weaponList.add((Weapon) item);
+        } else if (item.getType().equals("Armor")) {
+            armorList.add((Armor) item);
+        } else if (item.getType().equals("Potion")) {
+            potionList.add((Potion) item);
+        }
     }
 
     public List<Spell> getSpell() {
 //        List<Spell> spellList = new ArrayList<>();
-        for (RPGItem item : this.getItems()) {
-            if (item.getType().equals("Spell")) {
-                spellList.add((Spell) item);
-            }
-        }
         return spellList;
     }
 
@@ -73,11 +86,6 @@ public class Inventory {
 
     public List<Potion> getPotion() {
 //        List<Potion> potionList = new ArrayList<>();
-        for (RPGItem item : this.getItems()) {
-            if (item.getType().equals("Potion")) {
-                potionList.add((Potion) item);
-            }
-        }
         return potionList;
     }
 
@@ -93,21 +101,11 @@ public class Inventory {
 
     public List<Weapon> getWeapon() {
 //        List<Weapon> weaponList = new ArrayList<>();
-        for (RPGItem item : this.getItems()) {
-            if (item.getType().equals("Weapon")) {
-                weaponList.add((Weapon) item);
-            }
-        }
         return weaponList;
     }
 
     public List<Armor> getArmor() {
 //        List<Armor> armorList = new ArrayList<>();
-        for (RPGItem item : this.getItems()) {
-            if (item.getType().equals("Armor")) {
-                armorList.add((Armor) item);
-            }
-        }
         return armorList;
     }
 
