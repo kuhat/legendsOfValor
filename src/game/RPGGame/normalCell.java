@@ -31,13 +31,39 @@ public class normalCell extends Cell {
     private Party monsterParty;
 
     private Party heroParty;
+    protected boolean hasHero;
+    protected boolean hasMonster;
+    public void heroEntersSpace(Hero hero){}
+    public void heroExitsSpace(Hero hero){}
+    public void monsterEntersSpace(Monster monster){}
+    public void monsterExitsSpace(Monster monster){}
+
+    public boolean isHasHero() {
+        return hasHero;
+    }
+
+    public void setHasHero(boolean hasHero) {
+        this.hasHero = hasHero;
+    }
+
+    public boolean isHasMonster() {
+        return hasMonster;
+    }
+
+    public void setHasMonster(boolean hasMonster) {
+        this.hasMonster = hasMonster;
+    }
 
     public normalCell(String content) {
         super(content);
+        hasHero = false;
+        hasMonster = false;
     }
 
     public normalCell(String content, String type) {
         super(content, type);
+        hasHero = false;
+        hasMonster = false;
     }
 
     @Override

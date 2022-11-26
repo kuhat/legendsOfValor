@@ -1,6 +1,8 @@
 package game.role.places;
 
 import game.RPGGame.normalCell;
+import game.role.heroes.Hero;
+import game.role.monsters.Monster;
 
 /**
  * @projectName: monstersAndHeroes
@@ -21,4 +23,27 @@ public class Plain extends normalCell {
         super(content, type);
     }
 
+    @Override
+    public void heroEntersSpace(Hero hero) {
+        //super.heroEntersSpace(hero);
+        hasHero=true;
+    }
+
+    @Override
+    public void heroExitsSpace(Hero hero) {
+        //super.heroExitsSpace(hero);
+        hasHero=false;
+    }
+
+    @Override
+    public void monsterEntersSpace(Monster monster) {
+        //super.monsterEntersSpace(monster);
+        hasMonster=true;
+    }
+
+    @Override
+    public void monsterExitsSpace(Monster monster) {
+        //super.monsterExitsSpace(monster);
+        hasMonster=false;
+    }
 }
