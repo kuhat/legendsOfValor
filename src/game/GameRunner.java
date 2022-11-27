@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static game.utils.ConsoleColorsCodes.GREEN_BOLD_BRIGHT;
+import static game.utils.ConsoleColorsCodes.YELLOW_BOLD_BRIGHT;
 
 /**
  * @projectName: monstersAndHerios
@@ -81,7 +82,7 @@ public class GameRunner implements GameState {
         numRounds = 1;
         while (!isOver()) {
             if(numRounds % 8 == 0) {
-                printStream.println("New monsters are generated!");
+                printStream.println(YELLOW_BOLD_BRIGHT + "New monsters are generated!" + RESET);
                 spawnMonsters(3);
             }
             printStream.println(RED + "========Round " + numRounds + " begins===========" + RESET);
@@ -120,11 +121,6 @@ public class GameRunner implements GameState {
             map.setContent(7, i * 3, map.getCell(7, i *3).getHero().getCharacter() + "     ");
         }
         spawnMonsters(3);
-        // Initialize Monster 1,2,3 on the map
-        for (int i = 0; i < 3; i++) {
-            map.getCell(0, i * 3 + 1).setMonster(MonsterParty.getParty().get(i));
-            map.setContent(0, i * 3 + 1, "     " + map.getCell(0, i * 3 + 1).getMonster().getCharacter());
-        }
         printStream.println("Your hero party of size " + HeroParty.getParty().size() + " is ready to battle! ");
         printStream.println("Here is your game map: ");
         map.printMap();
@@ -149,6 +145,7 @@ public class GameRunner implements GameState {
      */
     private void spawnMonsters(int monsterNum) {
         int maxLevel = 0;
+        int preNum = MonsterParty.getParty().size();
         for (int i = 0; i < HeroParty.getParty().size(); i++) {
             maxLevel = Math.max(maxLevel, HeroParty.getParty().get(i).getLevel());
         }
@@ -158,6 +155,12 @@ public class GameRunner implements GameState {
             newMonster.setPos(0, i * 3 + 1);
             newMonster.setCharacter("M" + ((numRounds / 8) + i + 1));
             MonsterParty.addMember(newMonster);
+            printStream.println("Monster " + GREEN + newMonster.getName() + RESET + " was spawned.");
+        }
+        // Initialize Monsters on the map
+        for (int i = preNum, j = 0; i < preNum + monsterNum; i++, j++) {
+            map.getCell(0, j * 3 + 1).setMonster(MonsterParty.getParty().get(i));
+            map.setContent(0, j * 3 + 1, "     " + map.getCell(0, j * 3 + 1).getMonster().getCharacter());
         }
     }
 
@@ -756,7 +759,8 @@ public class GameRunner implements GameState {
         if (monsterCanAttack(monster)) {
             Hero hero = getNeighborHero(monster);
             monster.attack(hero);
-        } else {
+            // If there is already a  monster in front of this monster, do not move
+        } else if (!heroCanAttack(monster)) {
             printStream.println("No hero is within attack range, move forward");
             // Update the Content of the new Cell and old cell
             String prevContent = map.getCell(pos[0], pos[1]).getContent();
@@ -772,6 +776,8 @@ public class GameRunner implements GameState {
             if (pos[0] + 1 == 7) {
                 monsterWin();
             }
+        } else {
+            printStream.println("Another monster is in front of this monster, stop moving");
         }
         getInput("Press any key to proceed.");
     }
