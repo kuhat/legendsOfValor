@@ -4,7 +4,6 @@
     <list default="true" id="4399c6f5-6a81-40fd-8f23-ddbe102bbb40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GameRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/Cell.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +101,7 @@
       <workItem from="1669423644518" duration="2902000" />
       <workItem from="1669486719034" duration="12553000" />
       <workItem from="1669510587581" duration="5507000" />
-      <workItem from="1669572992661" duration="13228000" />
+      <workItem from="1669572992661" duration="16736000" />
     </task>
     <servers />
   </component>
