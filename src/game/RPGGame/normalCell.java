@@ -33,6 +33,11 @@ public class normalCell extends Cell {
     private Party heroParty;
     protected boolean hasHero;
     protected boolean hasMonster;
+
+    public normalCell() {
+        super();
+    }
+
     public void heroEntersSpace(Hero hero){}
     public void heroExitsSpace(Hero hero){}
     public void monsterEntersSpace(Monster monster){}

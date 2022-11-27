@@ -46,6 +46,10 @@ public abstract class Cell {
         this.type = type;
     }
 
+    public Cell() {
+
+    }
+
     public role getHero() {
         return hero;
     }

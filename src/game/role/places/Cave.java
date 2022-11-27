@@ -3,6 +3,7 @@ package game.role.places;
 import game.RPGGame.normalCell;
 import game.role.heroes.Hero;
 import game.role.monsters.Monster;
+import game.utils.ConsoleColorsCodes;
 
 /**
  * @projectName: monstersAndHeroes
@@ -22,11 +23,15 @@ public class Cave extends normalCell {
         super(content, type);
     }
 
+    public Cave() {
+
+    }
+
     @Override
     public void heroEntersSpace(Hero hero) {
 //        super.heroEntersSpace(hero);
         hasHero=true;
-        System.out.println("Hero entered Cave space and gained 10% of Agility");
+        System.out.println(ConsoleColorsCodes.WHITE_BRIGHT + "Hero entered Cave space and gained 10% of Agility" + ConsoleColorsCodes.RESET);
         int newAgility = (int) (hero.getAgility() * (1.1));
         hero.setAgility(newAgility);
     }
@@ -34,7 +39,7 @@ public class Cave extends normalCell {
     @Override
     public void heroExitsSpace(Hero hero) {
 //        super.heroExitsSpace(hero);
-        System.out.println("Hero exited the Cave space and lost extra 10% of Agility");
+        System.out.println(ConsoleColorsCodes.BLACK_BACKGROUND + "Hero exited the Cave space and lost extra 10% of Agility"+ConsoleColorsCodes.RESET);
         int newAgility = (int) (hero.getAgility() * (0.9));
         hero.setAgility(newAgility);
         hasHero=false;
@@ -44,7 +49,7 @@ public class Cave extends normalCell {
     public void monsterEntersSpace(Monster monster) {
 //        super.monsterEntersSpace(monster);
         hasMonster=true;
-        System.out.println("Monster entered Cave space and gained 10% of Dodge");
+        System.out.println(ConsoleColorsCodes.WHITE_BRIGHT + "Monster entered Cave space and gained 10% of Dodge" + ConsoleColorsCodes.RESET);
         int newDodge = (int) (monster.getDodge() * (1.1));
         monster.setDodge(newDodge);
 
@@ -53,7 +58,7 @@ public class Cave extends normalCell {
     @Override
     public void monsterExitsSpace(Monster monster) {
 //        super.monsterExitsSpace(monster);
-        System.out.println("Monster exited the Cave space and lost extra 10% of Dodge");
+        System.out.println(ConsoleColorsCodes.BLACK_BACKGROUND+"Monster exited the Cave space and lost extra 10% of Dodge"+ConsoleColorsCodes.RESET);
         int newDodge = (int) (monster.getDodge() * (0.9));
         monster.setDodge(newDodge);
         hasMonster=false;

@@ -23,6 +23,10 @@ public class Plain extends normalCell {
         super(content, type);
     }
 
+    public Plain() {
+
+    }
+
     @Override
     public void heroEntersSpace(Hero hero) {
         //super.heroEntersSpace(hero);

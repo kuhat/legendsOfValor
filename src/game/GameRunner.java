@@ -12,7 +12,7 @@ import game.role.item.Weapon;
 import game.role.monsters.Monster;
 import game.role.monsters.MonsterFactory;
 import game.role.mountable;
-import game.role.places.Map;
+import game.role.places.*;
 import game.role.role;
 import game.utils.ConsoleColorsCodes;
 import game.utils.instructions;
@@ -571,6 +571,24 @@ public class GameRunner implements GameState {
             map.setContent(i, j, ConsoleColorsCodes.BLUE_BOLD_BRIGHT + hero.getCharacter() + "     " + ConsoleColorsCodes.RESET);
         }
         newCell.setHero(hero);
+
+        if(newCell instanceof Bush){
+            Bush b = new Bush();
+            b.heroEntersSpace((Hero) hero);
+        }
+        if(newCell instanceof Cave){
+            Cave c = new Cave();
+            c.heroEntersSpace((Hero) hero);
+        }
+        if(newCell instanceof Koulou){
+            Koulou k =new Koulou();
+            k.heroEntersSpace((Hero) hero);
+        }
+        else{
+            Plain p = new Plain();
+            p.heroEntersSpace((Hero) hero);
+        }
+
         finish = true;
     }
 
@@ -600,6 +618,22 @@ public class GameRunner implements GameState {
         while(!checkValidity || !checkValidity2 || !checkCellValidity || checkMonsterSurpassed); //All condition should be false to break the loop
         makeMove(newTile[0], newTile[1], hero);
         Cell previousCell = map.getCell(currentRow,currentCol);
+        if(previousCell instanceof Bush){
+            Bush b = new Bush();
+            b.heroExitsSpace((Hero) hero);
+        }
+        if(previousCell instanceof Cave){
+            Cave c = new Cave();
+            c.heroExitsSpace((Hero) hero);
+        }
+        if(previousCell instanceof Koulou){
+            Koulou k =new Koulou();
+            k.heroExitsSpace((Hero) hero);
+        }
+        else{
+            Plain p = new Plain();
+            p.heroExitsSpace((Hero) hero);
+        }
         previousCell.setHero(null);
         map.setContent(currentRow,currentCol, "       ");
     }

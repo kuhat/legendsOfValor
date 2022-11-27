@@ -31,18 +31,18 @@ public class Map extends Board {
         // The first row and the last row are Nexuses and Inaccessibles
         for (int i = 0; i < 8; i++) {
             if (i == 2 || i == 5) {
-                setCell(0, i, new InaccessibleCell(" X X X ", "I"));
-                setCell(7, i, new InaccessibleCell(" X X X ", "I"));
+                setCell(0, i, new InaccessibleCell(ConsoleColorsCodes.BLACK_BACKGROUND+" X X X "+ConsoleColorsCodes.RESET, "I"));
+                setCell(7, i, new InaccessibleCell(ConsoleColorsCodes.BLACK_BACKGROUND+" X X X "+ConsoleColorsCodes.RESET, "I"));
             }
             else {
-                setCell(0, i, new Nexus("       ", "N"));
-                setCell(7, i, new Nexus("       ", "N"));
+                setCell(0, i, new Nexus(ConsoleColorsCodes.RED_BACKGROUND+"       "+ConsoleColorsCodes.RESET, "N"));
+                setCell(7, i, new Nexus(ConsoleColorsCodes.BLUE_BACKGROUND+"       "+ConsoleColorsCodes.RESET, "N"));
             }
         }
         // The Cell in the middle
         for (int i = 1; i < 7; i ++) {
             for (int j = 0; j < 8; j++) {
-                if (j == 2 || j == 5) setCell(i, j, new InaccessibleCell(" X X X ", "I"));
+                if (j == 2 || j == 5) setCell(i, j, new InaccessibleCell(ConsoleColorsCodes.BLACK_BACKGROUND+" X X X "+ConsoleColorsCodes.RESET, "I"));
                 else setCell(i, j, generateRandomCell());
             }
         }
