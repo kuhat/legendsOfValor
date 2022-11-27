@@ -6,6 +6,7 @@ import game.RPGGame.InaccessibleCell;
 import game.RPGGame.RPGItem;
 import game.role.heroes.Hero;
 import game.role.heroes.Party;
+import game.role.item.Spell;
 import game.role.monsters.Monster;
 import game.role.monsters.MonsterFactory;
 import game.role.places.Map;
@@ -15,6 +16,7 @@ import game.utils.instructions;
 
 import java.io.PrintStream;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -171,51 +173,70 @@ public class GameRunner implements GameState {
         }
     }
 
+    boolean finish;
     private void heroTakeAction(role hero) {
-        // If the hero is at the Nexus, ask if the player wants to buy things
-        int heroX = hero.getPos()[0];
-        int heroY = hero.getPos()[1];
-        if (heroX == 7) {
-            // Hero enters Nexus
-            map.getCell(heroX, heroY).enter(hero);
-        }
-        String input = "";
-        Boolean strRes = false;
-        while (!strRes) {
-            instructions.printHeroChoices(printStream, hero);
-            input = getInput("");
-            strRes = (input != null && input.matches("[1-8]"));
-            if (!strRes) printStream.println("Please choose one number from 1 to 8!");
-        }
-        switch (input) {
-            case "1":  // attack
-               Attack(hero);
-            case "2":  // cast spell
-                CastSpell(hero);
-            case "3":  // change armor/weapon
-                ChangeMountables();
-            case "4": // use potion
-                UsePotion();
-            case "5": // move
-                Move(hero);
-            case "6": // Teleport
-                Teleport();
-            case "7":
-                recall(hero);
-            case "8": // quit
-                System.out.println("Thanks for playing! ");
-                System.exit(0);
+        while(true) {
+            finish = false;
+            // If the hero is at the Nexus, ask if the player wants to buy things
+            int heroX = hero.getPos()[0];
+            int heroY = hero.getPos()[1];
+            if (heroX == 7) {
+                // Hero enters Nexus
+                map.getCell(heroX, heroY).enter(hero);
+            }
+            String input = "";
+            Boolean strRes = false;
+            while (!strRes) {
+                instructions.printHeroChoices(printStream, hero);
+                input = getInput("");
+                strRes = (input != null && input.matches("[1-8]"));
+                if (!strRes) printStream.println("Please choose one number from 1 to 8!");
+            }
+            switch (input) {
+                case "1":  // attack
+                    Attack(hero);
+                    break;
+                case "2":  // cast spell
+                    CastSpell(hero);
+                    break;
+                case "3":  // change armor/weapon
+                    ChangeMountables(hero);
+                    break;
+                case "4": // use potion
+                    UsePotion(hero);
+                    break;
+                case "5": // move
+                    Move(hero);
+                    break;
+                case "6": // Teleport
+                    Teleport();
+                    break;
+                case "7":
+                    recall(hero);
+                    break;
+                case "8": // quit
+                    System.out.println("Thanks for playing! ");
+                    System.exit(0);
+            }
+            if (finish) break;
         }
     }
 
     private void Attack(role hero) {
         if (canAttack(hero)){
-            heroAttack();
+            heroAttack(hero);
+            finish = true;
         } else {
             System.out.println("No monster is within attack range!");
+            finish = false;
         }
     }
 
+    /**
+     * Check if there is a monster within the attack range of the hero
+     * @param hero hero to attack
+     * @return true if the hero can attack
+     */
     private boolean canAttack(role hero) {
         int x = hero.getPos()[0], y = hero.getPos()[1];
         boolean res = map.getCell(Math.max(0, x - 1), Math.max(0, y - 1)).hasMonster() || map.getCell(Math.max(0, x - 1), y).hasMonster() || map.getCell(Math.max(0, x - 1), Math.min(7, y + 1)).hasMonster()
@@ -224,27 +245,108 @@ public class GameRunner implements GameState {
         return res;
     }
 
-    private void heroAttack() {
-
+    private void heroAttack(role hero) {
+        Monster monster = getNeighborMonster(hero);
+        hero.attack(monster);
     }
 
     private void CastSpell(role hero) {
         if (canAttack(hero)) {
-            heroCastSpell();
+            heroCastSpell(hero);
         } else{
             System.out.println("No monster is within attack range!");
+            finish = false;
         }
     }
 
-    private void heroCastSpell() {
+    private Monster getNeighborMonster(role hero) {
+        int x = hero.getPos()[0], y = hero.getPos()[1];
+        if (map.getCell(Math.max(0, x - 1), Math.max(0, y - 1)).hasMonster()) {
+            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
+                if (MonsterParty.getParty().get(i).getPos()[0] == Math.max(0, x - 1) && MonsterParty.getParty().get(i).getPos()[1] == Math.max(0, y  - 1)) {
+                    return (Monster) MonsterParty.getParty().get(i);
+                }
+            }
+        } else if (map.getCell(Math.max(0, x - 1), y).hasMonster()) {
+            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
+                if (MonsterParty.getParty().get(i).getPos()[0] == Math.max(0, x - 1) && MonsterParty.getParty().get(i).getPos()[1] == y) {
+                    return (Monster) MonsterParty.getParty().get(i);
+                }
+            }
+        } else if (map.getCell(Math.max(0, x - 1), Math.min(7, y + 1)).hasMonster()) {
+            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
+                if (MonsterParty.getParty().get(i).getPos()[0] == Math.max(0, x - 1) && MonsterParty.getParty().get(i).getPos()[1] == Math.min(7, y + 1)) {
+                    return (Monster) MonsterParty.getParty().get(i);
+                }
+            }
+        } else if (map.getCell(x, Math.max(0, y - 1)).hasMonster()) {
+            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
+                if (MonsterParty.getParty().get(i).getPos()[0] == x && MonsterParty.getParty().get(i).getPos()[1] == Math.max(0, y - 1)) {
+                    return (Monster) MonsterParty.getParty().get(i);
+                }
+            }
+        } else if (map.getCell(x, y).hasMonster()) {
+            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
+                if (MonsterParty.getParty().get(i).getPos()[0] == x && MonsterParty.getParty().get(i).getPos()[1] == y) {
+                    return (Monster) MonsterParty.getParty().get(i);
+                }
+            }
+        }  else if (map.getCell(x, Math.min(7, y + 1)).hasMonster()) {
+            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
+                if (MonsterParty.getParty().get(i).getPos()[0] == x && MonsterParty.getParty().get(i).getPos()[1] == Math.min(7, i + 1)) {
+                    return (Monster) MonsterParty.getParty().get(i);
+                }
+            }
+        } else if (map.getCell(Math.min(x + 1, 7), Math.max(0, y - 1)).hasMonster()) {
+            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
+                if (MonsterParty.getParty().get(i).getPos()[0] == Math.min(x + 1, 7) && MonsterParty.getParty().get(i).getPos()[1] == Math.max(0, y - 1)) {
+                    return (Monster) MonsterParty.getParty().get(i);
+                }
+            }
+        } else if (map.getCell(Math.min(x + 1, 7), y).hasMonster()) {
+            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
+                if (MonsterParty.getParty().get(i).getPos()[0] == Math.min(x + 1, 7) && MonsterParty.getParty().get(i).getPos()[1] == y) {
+                    return (Monster) MonsterParty.getParty().get(i);
+                }
+            }
+        }else {
+            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
+                if (MonsterParty.getParty().get(i).getPos()[0] == Math.min(x + 1, 7) && MonsterParty.getParty().get(i).getPos()[1] == Math.min(7, y + 1)) {
+                    return (Monster) MonsterParty.getParty().get(i);
+                }
+            }
+        }
+        return null;
+    }
+
+    private void heroCastSpell(role hero) {
+        Monster monster = getNeighborMonster(hero);
+        String input = "";
+        boolean strRes = false;
+        List<Spell> spellList = ((Hero) hero).getInventory().getSpell();
+        if (spellList.size() == 0) {
+            System.out.println("This Hero doesn't have any spells.");
+            finish = false;
+        } else {
+            finish = true;
+            System.out.println("Hero " + hero.getName() + " has " + ((Hero) hero).getMP() + " left.");
+            ((Hero) hero).getInventory().showSpell();
+            while (!strRes) {
+                input = getInput("Choose a spell to use:");
+                strRes = (input != null) && isValid(input, spellList.size() - 1);
+                if (!strRes) System.out.println("Invalid input, choose input from 0~" + (spellList.size() - 1));
+            }
+            if (!((Hero) hero).useSpellTo(Integer.valueOf(input), monster)) {
+                System.out.println("Hero doesn't have enough MANA left to cast the spell!");
+            }
+        }
+    }
+
+    private void ChangeMountables(role hero) {
 
     }
 
-    private void ChangeMountables() {
-
-    }
-
-    private void UsePotion() {
+    private void UsePotion(role hero) {
 
     }
 
@@ -503,5 +605,18 @@ public class GameRunner implements GameState {
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
+    }
+
+    /**
+     * Check if the input of the user is value and within heroIdx range
+     *
+     * @param input user input
+     * @return true if the input is an Integer and within hero idx range
+     */
+    private boolean isValid(String input, int upperValue) {
+        for (char s : input.toCharArray()) if (!Character.isDigit(s)) return false;
+        int value = Integer.valueOf(input);
+        if (value < 0 && value > upperValue) return false;
+        return true;
     }
 }

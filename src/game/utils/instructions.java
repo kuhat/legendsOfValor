@@ -262,7 +262,6 @@ public class instructions {
             printStream.println();
         }
         printStream.println(PURPLE + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" + RESET);
-
     }
 
     /**
