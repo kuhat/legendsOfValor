@@ -199,7 +199,7 @@ public class GameRunner implements GameState {
             case "5": // move
                 Move(hero);
             case "6": // Teleport
-                Teleport();
+                Teleport(hero);
             case "7":
                 recall(hero);
             case "8": // quit
@@ -261,26 +261,17 @@ public class GameRunner implements GameState {
 
         int direction;
 
-        String input = "";
-        boolean strRes = false;
-        while (!strRes) {
-            input = getInput("Please enter your choice: ");
-            strRes = (input != null && input.matches("[1-4]"));
-            if (!strRes) printStream.println("Invalid input, please input 1-4.");
-        }
-        direction = Integer.valueOf(input);
-
-
-//        do{
-//            System.out.println("Please enter your move as below:");
-//            Scanner s = new Scanner(System.in);
-//            try{
-//                direction = s.nextInt();
-//            }
-//            catch(InputMismatchException e){
-//                direction = 0;
-//            }
-//        }while(direction<1 || direction>4);
+        do{
+            System.out.println("Please enter your move as below:");
+            Scanner s = new Scanner(System.in);
+            try{
+                direction = s.nextInt();
+            }
+            catch(ArrayIndexOutOfBoundsException a){
+                System.out.println(ConsoleColorsCodes.RED+"Please select the valid move"+ConsoleColorsCodes.RESET);
+                direction = 0;
+            }
+        }while(direction<1 || direction>4);
         return direction;
     }
 
@@ -360,20 +351,59 @@ public class GameRunner implements GameState {
         return monsterPositionRow;
     }
 
-    private boolean isCellContentEmpty(int i, int j){
-        String cellContent;
-        cellContent = map.getCell(i,j).getContent();
-        if(cellContent.equalsIgnoreCase("       ")){
-            return true;
+    private int getHeroPosition(role hero){
+        int heroCol;
+        int heroPositionRow = 0;
+        heroCol = hero.getPos()[1];
+        if(heroCol==0 || heroCol==3 || heroCol==6){
+            for (int i=0;i<8;i++){
+                for(int j=heroCol;j<=(heroCol+1);j++){
+                    Cell cell = map.getCell(i,j);
+                    if(cell.hasHero()){
+                        if(i>heroPositionRow)
+                        {
+                        heroPositionRow=i;
+                        }
+                    }
+                }
+            }
         }
         else{
-            System.out.println(ConsoleColorsCodes.RED+"You are trying to access the Cell which is already occupied."+ConsoleColorsCodes.RESET);
+            for (int i=0;i<8;i++){
+                for(int j=(heroCol-1);j<=heroCol;j++){
+                    Cell cell = map.getCell(i,j);
+                    if(cell.hasHero()){
+                        if(i>heroPositionRow)
+                        {
+                        heroPositionRow=i;
+                        }
+                    }
+                }
+            }
+        }
+        return heroPositionRow;
+    }
+
+    private boolean isCellContentEmpty(int i, int j){
+        String cellContent;
+        if(i>=0 && i<8 && j>=0 && j<8 && i!=2 && i!=5) {
+            cellContent = map.getCell(i, j).getContent();
+            if (cellContent.equalsIgnoreCase("       ")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            System.out.println(ConsoleColorsCodes.RED + "You are trying wrong move." + ConsoleColorsCodes.RESET);
             return false;
         }
     }
 
     private void makeMove(int i, int j, role hero){
         hero.setPos(i,j);
+        System.out.println("New Positions: " + hero.getPos()[0]+ " " + hero.getPos()[1]);
     }
 
     private void getCoordinates(role hero){
@@ -386,7 +416,7 @@ public class GameRunner implements GameState {
         boolean checkMonsterSurpassed = true;
         boolean checkCellValidity;
         do {
-            System.out.println("HEroName"+hero.getName());
+            System.out.println("HeroName"+hero.getName());
             int direction = selectDirection();
             newTile=getDirectionCoordinates(direction, hero);
             checkValidity = isValidateMove(currentRow, currentCol);
@@ -400,7 +430,7 @@ public class GameRunner implements GameState {
                 System.out.println(ConsoleColorsCodes.RED+"You cannot surpass the monster."+ConsoleColorsCodes.RESET);
             }
         }
-        while(!checkValidity || !checkValidity2 || !checkCellValidity || !checkMonsterSurpassed);
+        while(!checkValidity || !checkValidity2 || !checkCellValidity || checkMonsterSurpassed); //All condition should be false to break the loop
         makeMove(newTile[0], newTile[1], hero);
     }
 
@@ -412,10 +442,93 @@ public class GameRunner implements GameState {
 
     }
 
-    private void Teleport() {
+    private void Teleport(role hero) {
+        int destinationLane;
+        String destinationLaneName;
+        while(true){
+            System.out.println("Enter the lane number to teleport: ");
+            System.out.println("1. Top Lane");
+            System.out.println("2. Mid Lane");
+            System.out.println("3. Bot Lane");
+            Scanner s = new Scanner(System.in);
+            int lane = s.nextInt();
+            int currentLane = getHeroCurrentLane(hero);
+            if(lane == currentLane){
+                System.out.println(ConsoleColorsCodes.RED + "Teleport is possible between different lanes" + ConsoleColorsCodes.RESET);
+            }
+            else if(lane>=1 && lane<=3 && (lane != currentLane)){
+                destinationLane = lane;
+                if(destinationLane == 1)
+                    destinationLaneName = "Top Lane";
+                else if(destinationLane == 2)
+                    destinationLaneName = "Middle Lane";
+                else if(destinationLane==3)
+                    destinationLaneName = "Bot Lane";
+                else destinationLaneName = "Null Lane";
+                System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination lane is: " + destinationLaneName + ConsoleColorsCodes.RESET);
+                break;
+            }
+
+        }
+        System.out.println("Out of loop");
+        while (true){
+            System.out.println("Enter the row number to teleport(0-7): ");
+            Scanner s = new Scanner(System.in);
+            int destinationRow = s.nextInt();
+            int destinationCol;
+            if(destinationRow>=0 && destinationRow<8){
+                System.out.println("Enter the column number to teleport(0-7):");
+                destinationCol = s.nextInt();
+                boolean validateCell = isCellContentEmpty(destinationRow, destinationCol);
+                if(validateCell){
+                    int monsterExploredRow = getMonsterPosition(hero);
+                    if(monsterExploredRow<=destinationRow){
+                        int heroExploredRow = getHeroPosition(hero);
+                        if(heroExploredRow<=destinationRow)
+                        {
+                            makeMove(destinationRow,destinationCol,hero);
+                            System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination lane is: " + destinationLaneName + ConsoleColorsCodes.RESET);
+                            System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination Row is: " + destinationRow + ConsoleColorsCodes.RESET);
+                            System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination Column is: " + destinationCol + ConsoleColorsCodes.RESET);
+                            break;
+                        }
+                        else{
+                            System.out.println(ConsoleColorsCodes.RED+"You cannot surpass the hero."+ConsoleColorsCodes.RESET);
+                        }
+                    }
+                    else {
+                        System.out.println(ConsoleColorsCodes.RED+"You cannot surpass the monster."+ConsoleColorsCodes.RESET);
+                    }
+                }
+                else{
+                    System.out.println(ConsoleColorsCodes.RED + "Please enter the column in the range of 0-7" + ConsoleColorsCodes.RESET);
+                }
+
+            }
+            else{
+                System.out.println(ConsoleColorsCodes.RED + "Please enter the row in the range of 0-7" + ConsoleColorsCodes.RESET);
+            }
+        }
 
     }
 
+    private int getHeroCurrentLane(role hero){
+        int currentLane=0;
+        int heroCol = hero.getPos()[1];
+        if(heroCol==0 || heroCol==1){
+            currentLane = 1;
+        }
+        else if(heroCol==3 || heroCol==4){
+            currentLane = 2;
+        }
+        else if(heroCol==6 || heroCol==7){
+            currentLane = 3;
+        }
+        else {
+            currentLane = 0;
+        }
+        return currentLane;
+    }
 
     private void MonsterTakeAction(role monster) {
 
