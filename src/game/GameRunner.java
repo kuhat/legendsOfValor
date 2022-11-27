@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static game.utils.ConsoleColorsCodes.GREEN_BOLD_BRIGHT;
+
 /**
  * @projectName: monstersAndHerios
  * @package: game
@@ -115,14 +117,14 @@ public class GameRunner implements GameState {
         map = new Map(8, HeroParty);
         // Initialize hero 1,2,3 on the map
         for (int i = 0; i < 3; i++) {
-            map.getCell(7, i * 3).setRole(HeroParty.getParty().get(i));
-            map.setContent(7, i * 3, map.getCell(7, i *3).getRole().getCharacter() + "     ");
+            map.getCell(7, i * 3).setHero(HeroParty.getParty().get(i));
+            map.setContent(7, i * 3, map.getCell(7, i *3).getHero().getCharacter() + "     ");
         }
         spawnMonsters(3);
         // Initialize Monster 1,2,3 on the map
         for (int i = 0; i < 3; i++) {
-            map.getCell(0, i * 3 + 1).setRole(MonsterParty.getParty().get(i));
-            map.setContent(0, i * 3 + 1, "     " + map.getCell(0, i * 3 + 1).getRole().getCharacter());
+            map.getCell(0, i * 3 + 1).setMonster(MonsterParty.getParty().get(i));
+            map.setContent(0, i * 3 + 1, "     " + map.getCell(0, i * 3 + 1).getMonster().getCharacter());
         }
         printStream.println("Your hero party of size " + HeroParty.getParty().size() + " is ready to battle! ");
         printStream.println("Here is your game map: ");
@@ -177,6 +179,7 @@ public class GameRunner implements GameState {
         for (int i = 0; i < MonsterParty.getParty().size(); i ++) {
             MonsterTakeAction(MonsterParty.getParty().get(i));
         }
+        map.printMap();
     }
 
     boolean finish;
@@ -543,8 +546,9 @@ public class GameRunner implements GameState {
     private boolean isCellContentEmpty(int i, int j){
         String cellContent;
         if(i>=0 && i<8 && j>=0 && j<8 && j!=2 && j!=5) {
+            Cell cell = map.getCell(i,j);
             cellContent = map.getCell(i, j).getContent();
-            if (cellContent.equalsIgnoreCase("       ")) {
+            if (cellContent.equalsIgnoreCase("       ") || cell.hasMonster()) {
                 return true;
             }
             else {
@@ -559,9 +563,15 @@ public class GameRunner implements GameState {
 
     private void makeMove(int i, int j, role hero){
         hero.setPos(i,j);
-        map.setContent(i,j,ConsoleColorsCodes.BLUE_BOLD_BRIGHT+hero.getCharacter()+"     "+ConsoleColorsCodes.RESET);
         Cell newCell = map.getCell(i,j);
-        newCell.setRole(hero);
+        if(newCell.hasMonster()){
+            String content = hero.getCharacter() + "   " + map.getCell(i, j).getMonster().getCharacter();
+            map.setContent(i, j, content);
+        }
+        else {
+            map.setContent(i, j, ConsoleColorsCodes.BLUE_BOLD_BRIGHT + hero.getCharacter() + "     " + ConsoleColorsCodes.RESET);
+        }
+        newCell.setHero(hero);
         finish = true;
         System.out.println("New Positions: " + hero.getPos()[0]+ " " + hero.getPos()[1]);
     }
@@ -593,7 +603,7 @@ public class GameRunner implements GameState {
         while(!checkValidity || !checkValidity2 || !checkCellValidity || checkMonsterSurpassed); //All condition should be false to break the loop
         makeMove(newTile[0], newTile[1], hero);
         Cell previousCell = map.getCell(currentRow,currentCol);
-        previousCell.setRole(null);
+        previousCell.setHero(null);
         map.setContent(currentRow,currentCol, "       ");
     }
 
@@ -759,11 +769,11 @@ public class GameRunner implements GameState {
             String prevContent = map.getCell(pos[0], pos[1]).getContent();
             prevContent = prevContent.substring(0, 5) + "  ";
             String newContent = map.getCell(pos[0] + 1, pos[1]).getContent();
-            newContent = newContent.substring(0, 5) + map.getCell(pos[0], pos[1]).getRole().getCharacter();
+            newContent = newContent.substring(0, 5) + map.getCell(pos[0], pos[1]).getMonster().getCharacter();
             monster.setPos(pos[0] + 1, pos[1]);
-            map.getCell(pos[0], pos[1]).setRole(null);
+            map.getCell(pos[0], pos[1]).setMonster(null);
             map.getCell(pos[0], pos[1]).setContent(prevContent);
-            map.getCell(pos[0] + 1, pos[1]).setRole(monster);
+            map.getCell(pos[0] + 1, pos[1]).setMonster(monster);
             map.getCell(pos[0] + 1, pos[1]).setContent(newContent);
             // if the monster enters hero's nexus, monster wins, game ends
             if (pos[0] + 1 == 7) {

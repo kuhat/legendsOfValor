@@ -26,7 +26,9 @@ public abstract class Cell {
      */
     private String type;
 
-    private role role;
+    private role hero;
+
+    private role monster;
 
     /**
      * type X stands for Inaccessible, M stands for Market
@@ -44,20 +46,28 @@ public abstract class Cell {
         this.type = type;
     }
 
-    public void setRole(role role) {
-        this.role = role;
+    public role getHero() {
+        return hero;
     }
 
-    public role getRole() {
-        return this.role;
+    public role getMonster() {
+        return monster;
+    }
+
+    public void setHero(role role) {
+        this.hero = role;
+    }
+
+    public void setMonster(role role) {
+        this.monster = role;
     }
 
     public boolean hasHero() {
-        return this.role != null && !this.role.getType().equals("Monster");
+        return this.hero != null;
     }
 
     public boolean hasMonster() {
-        return this.role != null && this.role.getType().equals("Monster");
+        return this.monster != null;
     }
 
     /**
@@ -65,12 +75,12 @@ public abstract class Cell {
      */
     public void printContent(){
         System.out.print("|");
-        if (this.role != null) {
-            if (this.role.getType().equals("Hero")) {
-                System.out.print(BLUE_BOLD_BRIGHT + content + RESET);
-            } else {
-                System.out.print(GREEN_BOLD_BRIGHT + content + RESET);
-            }
+        if (hasHero() && !hasMonster()) {
+            System.out.print(BLUE_BOLD_BRIGHT + content + RESET);
+        } else if (!hasHero() && hasMonster()) {
+            System.out.print(GREEN_BOLD_BRIGHT + content + RESET);
+        } else if (hasMonster() && hasHero()) {
+            System.out.print(BLUE_BOLD_BRIGHT + content.substring(0, 2) + "   " + GREEN_BOLD_BRIGHT + content.substring(5,7) + RESET);
         } else {
             System.out.print(RED + content + RESET);
         }
