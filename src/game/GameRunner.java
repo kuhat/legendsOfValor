@@ -516,7 +516,7 @@ public class GameRunner implements GameState {
                 for(int j=heroCol;j<=(heroCol+1);j++){
                     Cell cell = map.getCell(i,j);
                     if(cell.hasHero()){
-                        if(i>heroPositionRow)
+                        if(i<heroPositionRow)
                         {
                         heroPositionRow=i;
                         }
@@ -529,7 +529,7 @@ public class GameRunner implements GameState {
                 for(int j=(heroCol-1);j<=heroCol;j++){
                     Cell cell = map.getCell(i,j);
                     if(cell.hasHero()){
-                        if(i>heroPositionRow)
+                        if(i<heroPositionRow)
                         {
                         heroPositionRow=i;
                         }
@@ -559,6 +559,8 @@ public class GameRunner implements GameState {
 
     private void makeMove(int i, int j, role hero){
         hero.setPos(i,j);
+        map.setContent(i,j,ConsoleColorsCodes.BLUE_BOLD_BRIGHT+hero.getCharacter()+"     "+ConsoleColorsCodes.RESET);
+        finish = true;
         System.out.println("New Positions: " + hero.getPos()[0]+ " " + hero.getPos()[1]);
     }
 
@@ -588,6 +590,9 @@ public class GameRunner implements GameState {
         }
         while(!checkValidity || !checkValidity2 || !checkCellValidity || checkMonsterSurpassed); //All condition should be false to break the loop
         makeMove(newTile[0], newTile[1], hero);
+        Cell previousCell = map.getCell(currentRow,currentCol);
+        previousCell.setRole(null);
+        map.setContent(currentRow,currentCol, "       ");
     }
 
     private void recall(role hero) {
@@ -599,6 +604,8 @@ public class GameRunner implements GameState {
     }
 
     private void Teleport(role hero) {
+        int currentRow = hero.getPos()[0];
+        int currentCol = hero.getPos()[1];
         int destinationLane;
         String destinationLaneName;
         while(true){
@@ -640,13 +647,23 @@ public class GameRunner implements GameState {
                     int monsterExploredRow = getMonsterPosition(hero);
                     if(monsterExploredRow<=destinationRow){
                         int heroExploredRow = getHeroPosition(hero);
+                        System.out.println("Hero explored row"+heroExploredRow);
+                        System.out.println("Destination row"+destinationRow);
                         if(heroExploredRow<=destinationRow)
                         {
-                            makeMove(destinationRow,destinationCol,hero);
-                            System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination lane is: " + destinationLaneName + ConsoleColorsCodes.RESET);
-                            System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination Row is: " + destinationRow + ConsoleColorsCodes.RESET);
-                            System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination Column is: " + destinationCol + ConsoleColorsCodes.RESET);
-                            break;
+                            boolean adjacentToHeroCell = isHeroAdjacent(destinationRow,destinationCol);
+                            System.out.println("Check"+adjacentToHeroCell);
+                            if(adjacentToHeroCell) {
+                                makeMove(destinationRow, destinationCol, hero);
+                                map.setContent(currentRow, currentCol, "       ");
+                                System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination lane is: " + destinationLaneName + ConsoleColorsCodes.RESET);
+                                System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination Row is: " + destinationRow + ConsoleColorsCodes.RESET);
+                                System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination Column is: " + destinationCol + ConsoleColorsCodes.RESET);
+                                break;
+                            }
+                            else{
+                                System.out.println(ConsoleColorsCodes.RED+"Your chosen cell should be adjacent to hero cell"+ConsoleColorsCodes.RESET);
+                            }
                         }
                         else{
                             System.out.println(ConsoleColorsCodes.RED+"You cannot surpass the hero."+ConsoleColorsCodes.RESET);
@@ -657,16 +674,61 @@ public class GameRunner implements GameState {
                     }
                 }
                 else{
-                    System.out.println(ConsoleColorsCodes.RED + "Please enter the column in the range of 0-7" + ConsoleColorsCodes.RESET);
+                    System.out.println(ConsoleColorsCodes.RED + "Invalid move!" + ConsoleColorsCodes.RESET);
                 }
 
             }
             else{
-                System.out.println(ConsoleColorsCodes.RED + "Please enter the row in the range of 0-7" + ConsoleColorsCodes.RESET);
+                System.out.println(ConsoleColorsCodes.RED + "Invalid move!!" + ConsoleColorsCodes.RESET);
             }
         }
 
     }
+
+    boolean isHeroAdjacent(int destinationRow, int destinationCol){
+        int x, y;
+        x=destinationRow;
+        y=destinationCol;
+        Cell topCell = map.getCell(Math.min(x,x-1), y);
+        Cell leftCell = map.getCell(x,Math.min(y,y-1));
+        Cell rightCell = map.getCell(x, Math.min(y,y+1));
+        System.out.println("TC"+topCell.hasHero());
+        System.out.println("LC"+leftCell.hasHero());
+        System.out.println("RC"+rightCell.hasHero());
+        if(topCell.hasHero() || leftCell.hasHero() || rightCell.hasHero())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+//    private boolean getAdjacentHero(int destinationRow, int destinationCol) {
+//        int x = destinationRow, y = destinationCol;
+//        if (map.getCell(Math.max(0, x - 1), y).hasHero()) {
+//            for (int i = 0; i < HeroParty.getParty().size(); i++) {
+//                if (HeroParty.getParty().get(i).getPos()[0] == Math.max(0, x - 1) && HeroParty.getParty().get(i).getPos()[1] == y) {
+//                    return true;
+//                }
+//            }
+//        }  else if (map.getCell(x, Math.max(0, y - 1)).hasMonster()) {
+//            for (int i = 0; i < HeroParty.getParty().size(); i++) {
+//                if (HeroParty.getParty().get(i).getPos()[0] == x && HeroParty.getParty().get(i).getPos()[1] == Math.max(0, y - 1)) {
+//                    return true;
+//                }
+//            }
+//        }
+//        else if (map.getCell(x, Math.min(7, y + 1)).hasMonster()) {
+//            for (int i = 0; i < HeroParty.getParty().size(); i++) {
+//                if (HeroParty.getParty().get(i).getPos()[0] == x && HeroParty.getParty().get(i).getPos()[1] == Math.min(7, i + 1)) {
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     private int getHeroCurrentLane(role hero){
         int currentLane=0;
