@@ -10,8 +10,11 @@ import java.io.PrintStream;
 import java.util.List;
 
 import static game.GameRunner.*;
-import static game.utils.ConsoleColorsCodes.PURPLE;
-import static game.utils.ConsoleColorsCodes.YELLOW_BOLD_BRIGHT;
+import static game.utils.ConsoleColorsCodes.*;
+import static game.utils.ConsoleColorsCodes.BLUE;
+import static game.utils.ConsoleColorsCodes.GREEN;
+import static game.utils.ConsoleColorsCodes.RED;
+import static game.utils.ConsoleColorsCodes.RESET;
 
 /**
  * @projectName: monstersAndHeroes
@@ -124,7 +127,7 @@ public class instructions {
     }
 
     public static void printHeroChoices(PrintStream printStream, role hero) {
-        printStream.println("Please choose one action for hero " + hero.getName() + ":");
+        printStream.println("Please choose one action for hero " + BLUE_BOLD_BRIGHT + hero.getName() + RESET + ":");
         printStream.println(" 1: Attack\n 2: Use a spell\n 3: Change Weapon or Armor\n 4: Use a potion\n " +
                 "5: Move\n 6: Teleport\n 7: Recall\n 8: Quit game\n");
     }

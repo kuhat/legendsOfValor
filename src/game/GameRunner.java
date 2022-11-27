@@ -1,21 +1,25 @@
 package game;
 
+import com.sun.jdi.PrimitiveValue;
 import game.RPGGame.Board;
 import game.RPGGame.Cell;
-import game.RPGGame.InaccessibleCell;
 import game.RPGGame.RPGItem;
 import game.role.heroes.Hero;
 import game.role.heroes.Party;
+import game.role.item.Armor;
+import game.role.item.Potion;
 import game.role.item.Spell;
+import game.role.item.Weapon;
 import game.role.monsters.Monster;
 import game.role.monsters.MonsterFactory;
+import game.role.mountable;
 import game.role.places.Map;
 import game.role.role;
 import game.utils.ConsoleColorsCodes;
 import game.utils.instructions;
 
 import java.io.PrintStream;
-import java.util.InputMismatchException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -158,6 +162,8 @@ public class GameRunner implements GameState {
 
     private void playRound() {
         heroesAction();
+        printStream.println(BLUE + "================= Heroes' tur end =================" + GREEN);
+        printStream.println("================= Monster's turn begin =================" + RESET);
         monsterAction();
     }
 
@@ -185,7 +191,7 @@ public class GameRunner implements GameState {
                 map.getCell(heroX, heroY).enter(hero);
             }
             String input = "";
-            Boolean strRes = false;
+            boolean strRes = false;
             while (!strRes) {
                 instructions.printHeroChoices(printStream, hero);
                 input = getInput("");
@@ -207,12 +213,15 @@ public class GameRunner implements GameState {
                     break;
                 case "5": // move
                     Move(hero);
+                    map.printMap();
                     break;
                 case "6": // Teleport
                     Teleport(hero);
+                    map.printMap();
                     break;
                 case "7":
                     recall(hero);
+                    map.printMap();
                     break;
                 case "8": // quit
                     System.out.println("Thanks for playing! ");
@@ -223,7 +232,7 @@ public class GameRunner implements GameState {
     }
 
     private void Attack(role hero) {
-        if (canAttack(hero)){
+        if (heroCanAttack(hero)){
             heroAttack(hero);
             finish = true;
         } else {
@@ -237,7 +246,7 @@ public class GameRunner implements GameState {
      * @param hero hero to attack
      * @return true if the hero can attack
      */
-    private boolean canAttack(role hero) {
+    private boolean heroCanAttack(role hero) {
         int x = hero.getPos()[0], y = hero.getPos()[1];
         boolean res = map.getCell(Math.max(0, x - 1), Math.max(0, y - 1)).hasMonster() || map.getCell(Math.max(0, x - 1), y).hasMonster() || map.getCell(Math.max(0, x - 1), Math.min(7, y + 1)).hasMonster()
                 || map.getCell(x, Math.max(0, y - 1)).hasMonster() || map.getCell(x,y).hasMonster() || map.getCell(x, Math.min(7, y + 1)).hasMonster() ||
@@ -251,7 +260,7 @@ public class GameRunner implements GameState {
     }
 
     private void CastSpell(role hero) {
-        if (canAttack(hero)) {
+        if (heroCanAttack(hero)) {
             heroCastSpell(hero);
         } else{
             System.out.println("No monster is within attack range!");
@@ -259,6 +268,11 @@ public class GameRunner implements GameState {
         }
     }
 
+    /**
+     * Get the position of the neighboring Monster to attack
+     * @param hero hero to attack
+     * @return the first Monster that is within attack range
+     */
     private Monster getNeighborMonster(role hero) {
         int x = hero.getPos()[0], y = hero.getPos()[1];
         if (map.getCell(Math.max(0, x - 1), Math.max(0, y - 1)).hasMonster()) {
@@ -343,11 +357,51 @@ public class GameRunner implements GameState {
     }
 
     private void ChangeMountables(role hero) {
-
+        boolean strRes = false;
+        String input = "";
+        List<RPGItem> weaponsAndArmors = new ArrayList<>();
+        weaponsAndArmors.addAll(((Hero) hero).getInventory().getWeapon());
+        weaponsAndArmors.addAll(((Hero) hero).getInventory().getArmor());
+        if (weaponsAndArmors.size() == 0) {
+            System.out.println("Currently there are no any Weapons or Armors in this hero's inventory.");
+        } else {
+            Weapon equippedWeapon = ((Hero) hero).getWeapon();
+            Armor equippedArmor = ((Hero) hero).getArmor();
+            if (equippedWeapon == null) System.out.println("Equipped Weapon is None");
+            else
+                System.out.println("Equipped Weapon: " + equippedWeapon.getName() + ", Damage: " + equippedWeapon.getDamage());
+            if (equippedArmor == null) System.out.println("Equipped Armor is None");
+            else
+                System.out.println("Equipped Armor: " + equippedArmor.getName() + ", Reduction: " + equippedArmor.getReduction());
+            System.out.println("You can choose Armors and Weapons in the current inventory to equip.");
+            List<mountable> mountables = ((Hero) hero).getInventory().showMountable();
+            while (!strRes) {
+                input = getInput("Choose a Weapon or Armor to equip:");
+                strRes = (input != null) && isValid(input, mountables.size() - 1);
+                if (!strRes) System.out.println("Invalid input, choose input from 0~" + (mountables.size() - 1));
+            }
+            mountable equipment = mountables.get(Integer.valueOf(input));
+            equipment.equip((Hero) hero);
+            System.out.println("Hero successfully equipped " + equipment.getType() + ": " + equipment.getName());
+        }
     }
 
     private void UsePotion(role hero) {
-
+        boolean strRes = false;
+        String input = "";
+        List<Potion> potionList = ((Hero) hero).getInventory().getPotion();
+        if (potionList.size() == 0) System.out.println("This hero doesn't have any potions!");
+        else {
+            ((Hero) hero).getInventory().showPotion();
+            while (!strRes) {
+                input = getInput("Choose a Potion to use:");
+                strRes = (input != null) && isValid(input, potionList.size() - 1);
+                if (!strRes) System.out.println("Invalid input, choose input from 0~" + (potionList.size() - 1));
+            }
+            ((Hero) hero).usePotion(Integer.valueOf(input));
+            System.out.println("After using potion, the property of hero: " + hero.getName() + ": \n"
+                    + ((Hero) hero).toString());
+        }
     }
 
     private void Move(role hero) {
@@ -633,7 +687,87 @@ public class GameRunner implements GameState {
     }
 
     private void MonsterTakeAction(role monster) {
+        printStream.println("Monster " + RED + monster.getName() + RESET + " is taking action.");
+        int[] pos = monster.getPos();
+        if (monsterCanAttack(monster)) {
+            Hero hero = getNeighborHero(monster);
+            monster.attack(hero);
+        } else {
+            printStream.println("No hero is within attack range, move forward");
+            // Update the Content of the new Cell and old cell
+            String prevContent = map.getCell(pos[0], pos[1]).getContent();
+            prevContent = prevContent.substring(0, 5) + "  ";
+            String newContent = map.getCell(pos[0] + 1, pos[1]).getContent();
+            newContent = newContent.substring(0, 5) + map.getCell(pos[0], pos[1]).getRole().getCharacter();
+            monster.setPos(pos[0] + 1, pos[1]);
+            map.getCell(pos[0], pos[1]).setContent(prevContent);
+            map.getCell(pos[0] + 1, pos[1]).setContent(newContent);
+            // if the monster enters hero's nexus, monster wins, game ends
+            if (pos[0] + 1 == 7) {
+                monsterWin();
+            }
+        }
+        getInput("Press any key to proceed.");
+    }
 
+    /**
+     * Check if any heroes are within the attack range of the monster
+     * @param monster monster to attack
+     * @return true if a hero is within range
+     */
+    private boolean monsterCanAttack(role monster) {
+        int x = monster.getPos()[0], y = monster.getPos()[1];
+        boolean res = map.getCell(Math.max(0, x - 1), Math.max(0, y - 1)).hasHero() || map.getCell(Math.max(0, x - 1), y).hasHero() || map.getCell(Math.max(0, x - 1), Math.min(7, y + 1)).hasHero()
+                || map.getCell(x, Math.max(0, y - 1)).hasHero() || map.getCell(x,y).hasHero() || map.getCell(x, Math.min(7, y + 1)).hasHero() ||
+                map.getCell(Math.min(7, x + 1), Math.max(0, y - 1)).hasHero() || map.getCell(Math.min(7, x + 1), y).hasHero() || map.getCell(Math.min(7, x + 1), Math.min(7, y + 1)).hasHero();
+        return res;
+    }
+
+    /**
+     * Get the position of the neighboring Hero to attack
+     * @param monster Monster to attack
+     * @return the first Hero that is within attack range
+     */
+    private Hero getNeighborHero(role monster) {
+        int x = monster.getPos()[0], y = monster.getPos()[1];
+        if (map.getCell(x, Math.max(0, y - 1)).hasHero()) {
+            for (int i = 0; i < HeroParty.getParty().size(); i++) {
+                if (HeroParty.getParty().get(i).getPos()[0] == x && HeroParty.getParty().get(i).getPos()[1] == Math.max(0, y - 1)) {
+                    return (Hero) HeroParty.getParty().get(i);
+                }
+            }
+        } else if (map.getCell(x, y).hasHero()) {
+            for (int i = 0; i < HeroParty.getParty().size(); i++) {
+                if (HeroParty.getParty().get(i).getPos()[0] == x && HeroParty.getParty().get(i).getPos()[1] == y) {
+                    return (Hero) HeroParty.getParty().get(i);
+                }
+            }
+        }  else if (map.getCell(x, Math.min(7, y + 1)).hasHero()) {
+            for (int i = 0; i < HeroParty.getParty().size(); i++) {
+                if (HeroParty.getParty().get(i).getPos()[0] == x && HeroParty.getParty().get(i).getPos()[1] == Math.min(7, i + 1)) {
+                    return (Hero) HeroParty.getParty().get(i);
+                }
+            }
+        } else if (map.getCell(Math.min(x + 1, 7), Math.max(0, y - 1)).hasHero()) {
+            for (int i = 0; i < HeroParty.getParty().size(); i++) {
+                if (HeroParty.getParty().get(i).getPos()[0] == Math.min(x + 1, 7) && HeroParty.getParty().get(i).getPos()[1] == Math.max(0, y - 1)) {
+                    return (Hero) HeroParty.getParty().get(i);
+                }
+            }
+        } else if (map.getCell(Math.min(x + 1, 7), y).hasHero()) {
+            for (int i = 0; i < HeroParty.getParty().size(); i++) {
+                if (HeroParty.getParty().get(i).getPos()[0] == Math.min(x + 1, 7) && HeroParty.getParty().get(i).getPos()[1] == y) {
+                    return (Hero) HeroParty.getParty().get(i);
+                }
+            }
+        }else {
+            for (int i = 0; i < HeroParty.getParty().size(); i++) {
+                if (HeroParty.getParty().get(i).getPos()[0] == Math.min(x + 1, 7) && HeroParty.getParty().get(i).getPos()[1] == Math.min(7, y + 1)) {
+                    return (Hero) HeroParty.getParty().get(i);
+                }
+            }
+        }
+        return null;
     }
 
     private void heroWin() {

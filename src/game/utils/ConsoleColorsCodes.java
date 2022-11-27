@@ -8,6 +8,8 @@ public class ConsoleColorsCodes {
     public static final String RED = "\033[0;31m";     // red color
     public static final String GREEN = "\033[0;32m";   // green color
 
+    public static final String BLUE = "\u001B[34m";
+
     public static final String PURPLE = "\033[0;35m";  // purple color
     public static final String CYAN = "\033[0;36m";    // cyan color
     public static final String WHITE_BRIGHT = "\033[0;97m";  // white color
