@@ -414,7 +414,7 @@ public class GameRunner implements GameState {
     private boolean isValidateMove(int i, int j){
 
         if(i>=0 && i<8 && j>=0 && j<8){
-            if (i == 2 || i == 5) {
+            if (j == 2 || j == 5) {
                 System.out.println(ConsoleColorsCodes.RED+"You are trying to access Inaccessible area!!"+ConsoleColorsCodes.RESET);
                 return false;
             }
@@ -491,7 +491,7 @@ public class GameRunner implements GameState {
 
     private boolean isCellContentEmpty(int i, int j){
         String cellContent;
-        if(i>=0 && i<8 && j>=0 && j<8 && i!=2 && i!=5) {
+        if(i>=0 && i<8 && j>=0 && j<8 && j!=2 && j!=5) {
             cellContent = map.getCell(i, j).getContent();
             if (cellContent.equalsIgnoreCase("       ")) {
                 return true;
@@ -509,6 +509,8 @@ public class GameRunner implements GameState {
     private void makeMove(int i, int j, role hero){
         hero.setPos(i,j);
         map.setContent(i,j,ConsoleColorsCodes.BLUE_BOLD_BRIGHT+hero.getCharacter()+"     "+ConsoleColorsCodes.RESET);
+        Cell newCell = map.getCell(i,j);
+        newCell.setRole(hero);
         finish = true;
         System.out.println("New Positions: " + hero.getPos()[0]+ " " + hero.getPos()[1]);
     }
@@ -635,15 +637,36 @@ public class GameRunner implements GameState {
     }
 
     boolean isHeroAdjacent(int destinationRow, int destinationCol){
-        int x, y;
-        x=destinationRow;
-        y=destinationCol;
-        Cell topCell = map.getCell(Math.min(x,x-1), y);
-        Cell leftCell = map.getCell(x,Math.min(y,y-1));
-        Cell rightCell = map.getCell(x, Math.min(y,y+1));
-        System.out.println("TC"+topCell.hasHero());
-        System.out.println("LC"+leftCell.hasHero());
-        System.out.println("RC"+rightCell.hasHero());
+
+        if(destinationCol==0){
+            Cell topCell = map.getCell(destinationRow-1, destinationCol);
+            Cell rightCell = map.getCell(destinationRow, destinationCol+1);
+            if(topCell.hasHero()  || rightCell.hasHero())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if(destinationCol==7){
+            Cell topCell = map.getCell(destinationRow-1, destinationCol);
+            Cell leftCell = map.getCell(destinationRow,destinationCol-1);
+            if(topCell.hasHero() || leftCell.hasHero())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else {
+            Cell topCell = map.getCell(destinationRow - 1, destinationCol);
+            Cell leftCell = map.getCell(destinationRow, destinationCol - 1);
+            Cell rightCell = map.getCell(destinationRow, destinationCol + 1);
+
         if(topCell.hasHero() || leftCell.hasHero() || rightCell.hasHero())
         {
             return true;
@@ -652,32 +675,8 @@ public class GameRunner implements GameState {
         {
             return false;
         }
+        }
     }
-
-//    private boolean getAdjacentHero(int destinationRow, int destinationCol) {
-//        int x = destinationRow, y = destinationCol;
-//        if (map.getCell(Math.max(0, x - 1), y).hasHero()) {
-//            for (int i = 0; i < HeroParty.getParty().size(); i++) {
-//                if (HeroParty.getParty().get(i).getPos()[0] == Math.max(0, x - 1) && HeroParty.getParty().get(i).getPos()[1] == y) {
-//                    return true;
-//                }
-//            }
-//        }  else if (map.getCell(x, Math.max(0, y - 1)).hasMonster()) {
-//            for (int i = 0; i < HeroParty.getParty().size(); i++) {
-//                if (HeroParty.getParty().get(i).getPos()[0] == x && HeroParty.getParty().get(i).getPos()[1] == Math.max(0, y - 1)) {
-//                    return true;
-//                }
-//            }
-//        }
-//        else if (map.getCell(x, Math.min(7, y + 1)).hasMonster()) {
-//            for (int i = 0; i < HeroParty.getParty().size(); i++) {
-//                if (HeroParty.getParty().get(i).getPos()[0] == x && HeroParty.getParty().get(i).getPos()[1] == Math.min(7, i + 1)) {
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
 
     private int getHeroCurrentLane(role hero){
         int currentLane=0;
