@@ -465,7 +465,7 @@ public class GameRunner implements GameState {
     private boolean isValidateMove(int i, int j){
 
         if(i>=0 && i<8 && j>=0 && j<8){
-            if (i == 2 || i == 5) {
+            if (j == 2 || j == 5) {
                 System.out.println(ConsoleColorsCodes.RED+"You are trying to access Inaccessible area!!"+ConsoleColorsCodes.RESET);
                 return false;
             }
@@ -542,7 +542,7 @@ public class GameRunner implements GameState {
 
     private boolean isCellContentEmpty(int i, int j){
         String cellContent;
-        if(i>=0 && i<8 && j>=0 && j<8 && i!=2 && i!=5) {
+        if(i>=0 && i<8 && j>=0 && j<8 && j!=2 && j!=5) {
             cellContent = map.getCell(i, j).getContent();
             if (cellContent.equalsIgnoreCase("       ")) {
                 return true;
@@ -762,7 +762,9 @@ public class GameRunner implements GameState {
             String newContent = map.getCell(pos[0] + 1, pos[1]).getContent();
             newContent = newContent.substring(0, 5) + map.getCell(pos[0], pos[1]).getRole().getCharacter();
             monster.setPos(pos[0] + 1, pos[1]);
+            map.getCell(pos[0], pos[1]).setRole(null);
             map.getCell(pos[0], pos[1]).setContent(prevContent);
+            map.getCell(pos[0] + 1, pos[1]).setRole(monster);
             map.getCell(pos[0] + 1, pos[1]).setContent(newContent);
             // if the monster enters hero's nexus, monster wins, game ends
             if (pos[0] + 1 == 7) {
