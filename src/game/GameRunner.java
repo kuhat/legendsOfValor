@@ -1,6 +1,5 @@
 package game;
 
-import com.sun.jdi.PrimitiveValue;
 import game.RPGGame.Board;
 import game.RPGGame.Cell;
 import game.RPGGame.RPGItem;
@@ -573,7 +572,6 @@ public class GameRunner implements GameState {
         }
         newCell.setHero(hero);
         finish = true;
-        System.out.println("New Positions: " + hero.getPos()[0]+ " " + hero.getPos()[1]);
     }
 
     private void getCoordinates(role hero){
@@ -586,7 +584,6 @@ public class GameRunner implements GameState {
         boolean checkMonsterSurpassed = true;
         boolean checkCellValidity;
         do {
-            System.out.println("HeroName"+hero.getName());
             int direction = selectDirection();
             newTile=getDirectionCoordinates(direction, hero);
             checkValidity = isValidateMove(currentRow, currentCol);
@@ -641,58 +638,54 @@ public class GameRunner implements GameState {
                     destinationLaneName = "Bot Lane";
                 else destinationLaneName = "Null Lane";
                 System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination lane is: " + destinationLaneName + ConsoleColorsCodes.RESET);
-                break;
-            }
-
-        }
-        System.out.println("Out of loop");
-        while (true){
-            System.out.println("Enter the row number to teleport(0-7): ");
-            Scanner s = new Scanner(System.in);
-            int destinationRow = s.nextInt();
-            int destinationCol;
-            if(destinationRow>=0 && destinationRow<8){
-                System.out.println("Enter the column number to teleport(0-7):");
-                destinationCol = s.nextInt();
-                boolean validateCell = isCellContentEmpty(destinationRow, destinationCol);
-                if(validateCell){
-                    int monsterExploredRow = getMonsterPosition(hero);
-                    if(monsterExploredRow<=destinationRow){
-                        int heroExploredRow = getHeroPosition(hero);
-                        System.out.println("Hero explored row"+heroExploredRow);
-                        System.out.println("Destination row"+destinationRow);
-                        if(heroExploredRow<=destinationRow)
-                        {
-                            boolean adjacentToHeroCell = isHeroAdjacent(destinationRow,destinationCol);
-                            System.out.println("Check"+adjacentToHeroCell);
-                            if(adjacentToHeroCell) {
-                                makeMove(destinationRow, destinationCol, hero);
-                                map.setContent(currentRow, currentCol, "       ");
-                                System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination lane is: " + destinationLaneName + ConsoleColorsCodes.RESET);
-                                System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination Row is: " + destinationRow + ConsoleColorsCodes.RESET);
-                                System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination Column is: " + destinationCol + ConsoleColorsCodes.RESET);
-                                break;
+                {
+                    System.out.println("Enter the row number to teleport(0-7): ");
+                    //Scanner s = new Scanner(System.in);
+                    int destinationRow = s.nextInt();
+                    int destinationCol;
+                    if(destinationRow>=0 && destinationRow<8){
+                        System.out.println("Enter the column number to teleport(0-7):");
+                        destinationCol = s.nextInt();
+                        boolean validateCell = isCellContentEmpty(destinationRow, destinationCol);
+                        if(validateCell){
+                            int monsterExploredRow = getMonsterPosition(hero);
+                            if(monsterExploredRow<=destinationRow){
+                                int heroExploredRow = getHeroPosition(hero);
+                                if(heroExploredRow<=destinationRow)
+                                {
+                                    boolean adjacentToHeroCell = isHeroAdjacent(destinationRow,destinationCol);
+                                    if(adjacentToHeroCell) {
+                                        makeMove(destinationRow, destinationCol, hero);
+                                        map.setContent(currentRow, currentCol, "       ");
+                                        System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination lane is: " + destinationLaneName + ConsoleColorsCodes.RESET);
+                                        System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination Row is: " + destinationRow + ConsoleColorsCodes.RESET);
+                                        System.out.println(ConsoleColorsCodes.YELLOW_BOLD_BRIGHT + "Your destination Column is: " + destinationCol + ConsoleColorsCodes.RESET);
+                                        break;
+                                    }
+                                    else{
+                                        System.out.println(ConsoleColorsCodes.RED+"Your chosen cell should be adjacent to hero cell"+ConsoleColorsCodes.RESET);
+                                    }
+                                }
+                                else{
+                                    System.out.println(ConsoleColorsCodes.RED+"You cannot surpass the hero."+ConsoleColorsCodes.RESET);
+                                }
                             }
-                            else{
-                                System.out.println(ConsoleColorsCodes.RED+"Your chosen cell should be adjacent to hero cell"+ConsoleColorsCodes.RESET);
+                            else {
+                                System.out.println(ConsoleColorsCodes.RED+"You cannot surpass the monster."+ConsoleColorsCodes.RESET);
                             }
                         }
                         else{
-                            System.out.println(ConsoleColorsCodes.RED+"You cannot surpass the hero."+ConsoleColorsCodes.RESET);
+                            System.out.println(ConsoleColorsCodes.RED + "Invalid move!" + ConsoleColorsCodes.RESET);
                         }
+
                     }
-                    else {
-                        System.out.println(ConsoleColorsCodes.RED+"You cannot surpass the monster."+ConsoleColorsCodes.RESET);
+                    else{
+                        System.out.println(ConsoleColorsCodes.RED + "Invalid move!!" + ConsoleColorsCodes.RESET);
                     }
-                }
-                else{
-                    System.out.println(ConsoleColorsCodes.RED + "Invalid move!" + ConsoleColorsCodes.RESET);
                 }
 
             }
-            else{
-                System.out.println(ConsoleColorsCodes.RED + "Invalid move!!" + ConsoleColorsCodes.RESET);
-            }
+
         }
 
     }
