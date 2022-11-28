@@ -157,7 +157,7 @@ public abstract class role implements attackable, Product {
                     if (other.getType().equals("Monster")) {
                         System.out.println("Your hero has slayed a monster. Leveled up by one. Current level: " + this.getLevel() + 1);
                         ((Hero)this).levelUp();
-                        ((Hero)this).setMoney(((Hero)this).getMoney() + 100 * other.getLevel());
+//                        ((Hero)this).setMoney(((Hero)this).getMoney() + 100 * other.getLevel());
                     }
                 }
             }

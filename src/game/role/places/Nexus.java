@@ -104,7 +104,7 @@ public class Nexus extends normalCell {
         boolean strRes = false;
         while (!strRes) {
             input = getInput("Please choose which weapon to buy:");
-            strRes = (input != null && checkDigit(input) && (Integer.parseInt(input) >= 0
+            strRes = (input != null && !input.equals("") && checkDigit(input) && (Integer.parseInt(input) >= 0
                     || Integer.parseInt(input) < weaponList.size()));
             if (!strRes) System.out.println("Please enter digit between 0 and " + (weaponList.size() - 1));
         }
