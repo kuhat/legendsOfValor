@@ -200,61 +200,24 @@ public class Round {
     private Monster getNeighborMonster(role hero) {
         int x = hero.getPos()[0], y = hero.getPos()[1];
         if (map.getCell(Math.max(0, x - 1), Math.max(0, y - 1)).hasMonster()) {
-            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
-                if (MonsterParty.getParty().get(i).getPos()[0] == Math.max(0, x - 1) && MonsterParty.getParty().get(i).getPos()[1] == Math.max(0, y - 1)) {
-                    return (Monster) MonsterParty.getParty().get(i);
-                }
-            }
+            return (Monster) map.getCell(Math.max(0, x - 1), Math.max(0, y - 1)).getMonster();
         } else if (map.getCell(Math.max(0, x - 1), y).hasMonster()) {
-            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
-                if (MonsterParty.getParty().get(i).getPos()[0] == Math.max(0, x - 1) && MonsterParty.getParty().get(i).getPos()[1] == y) {
-                    return (Monster) MonsterParty.getParty().get(i);
-                }
-            }
+            return (Monster) map.getCell(Math.max(0, x - 1), y).getMonster();
         } else if (map.getCell(Math.max(0, x - 1), Math.min(7, y + 1)).hasMonster()) {
-            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
-                if (MonsterParty.getParty().get(i).getPos()[0] == Math.max(0, x - 1) && MonsterParty.getParty().get(i).getPos()[1] == Math.min(7, y + 1)) {
-                    return (Monster) MonsterParty.getParty().get(i);
-                }
-            }
+            return (Monster) map.getCell(Math.max(0, x - 1), Math.min(7, y + 1)).getMonster();
         } else if (map.getCell(x, Math.max(0, y - 1)).hasMonster()) {
-            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
-                if (MonsterParty.getParty().get(i).getPos()[0] == x && MonsterParty.getParty().get(i).getPos()[1] == Math.max(0, y - 1)) {
-                    return (Monster) MonsterParty.getParty().get(i);
-                }
-            }
+            return (Monster) map.getCell(x, Math.max(0, y - 1)).getMonster();
         } else if (map.getCell(x, y).hasMonster()) {
-            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
-                if (MonsterParty.getParty().get(i).getPos()[0] == x && MonsterParty.getParty().get(i).getPos()[1] == y) {
-                    return (Monster) MonsterParty.getParty().get(i);
-                }
-            }
+            return (Monster) map.getCell(x, y).getMonster();
         } else if (map.getCell(x, Math.min(7, y + 1)).hasMonster()) {
-            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
-                if (MonsterParty.getParty().get(i).getPos()[0] == x && MonsterParty.getParty().get(i).getPos()[1] == Math.min(7, i + 1)) {
-                    return (Monster) MonsterParty.getParty().get(i);
-                }
-            }
+            return (Monster) map.getCell(x, Math.min(7, y + 1)).getMonster();
         } else if (map.getCell(Math.min(x + 1, 7), Math.max(0, y - 1)).hasMonster()) {
-            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
-                if (MonsterParty.getParty().get(i).getPos()[0] == Math.min(x + 1, 7) && MonsterParty.getParty().get(i).getPos()[1] == Math.max(0, y - 1)) {
-                    return (Monster) MonsterParty.getParty().get(i);
-                }
-            }
+            return (Monster) map.getCell(Math.min(x + 1, 7), Math.max(0, y - 1)).getMonster();
         } else if (map.getCell(Math.min(x + 1, 7), y).hasMonster()) {
-            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
-                if (MonsterParty.getParty().get(i).getPos()[0] == Math.min(x + 1, 7) && MonsterParty.getParty().get(i).getPos()[1] == y) {
-                    return (Monster) MonsterParty.getParty().get(i);
-                }
-            }
+            return (Monster) map.getCell(Math.min(x + 1, 7), y).getMonster();
         } else {
-            for (int i = 0; i < MonsterParty.getParty().size(); i++) {
-                if (MonsterParty.getParty().get(i).getPos()[0] == Math.min(x + 1, 7) && MonsterParty.getParty().get(i).getPos()[1] == Math.min(7, y + 1)) {
-                    return (Monster) MonsterParty.getParty().get(i);
-                }
-            }
+            return (Monster) map.getCell(Math.min(x + 1, 7), Math.min(7, y + 1)).getMonster();
         }
-        return null;
     }
 
     private void heroCastSpell(role hero) {
