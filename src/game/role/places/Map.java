@@ -13,7 +13,7 @@ import static game.utils.ConsoleColorsCodes.CYAN;
  * @package: game.RPGGame
  * @className: Map
  * @author: Danny
- * @description: TODO
+ * @description: Map instance where game happens on
  * @date: 2022/11/20 17:06
  * @version: 1.0
  */
@@ -35,8 +35,8 @@ public class Map extends Board {
                 setCell(7, i, new InaccessibleCell(ConsoleColorsCodes.BLACK_BACKGROUND+" X X X "+ConsoleColorsCodes.RESET, "I"));
             }
             else {
-                setCell(0, i, new Nexus(ConsoleColorsCodes.RED_BACKGROUND+"       "+ConsoleColorsCodes.RESET, "N"));
-                setCell(7, i, new Nexus(ConsoleColorsCodes.BLUE_BACKGROUND+"       "+ConsoleColorsCodes.RESET, "N"));
+                setCell(0, i, new Nexus("       ", "N"));
+                setCell(7, i, new Nexus("       ", "N"));
             }
         }
         // The Cell in the middle

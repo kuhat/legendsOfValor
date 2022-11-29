@@ -2,7 +2,6 @@ package game.role.item;
 
 import game.RPGGame.RPGItem;
 
-import java.util.HashMap;
 
 /**
  * @projectName: monstersAndHerios

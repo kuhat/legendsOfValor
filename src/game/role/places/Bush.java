@@ -10,7 +10,7 @@ import game.utils.ConsoleColorsCodes;
  * @package: game.role.places
  * @className: Bush
  * @author: Danny
- * @description: TODO
+ * @description: Bush place which boosts role's dexterity
  * @date: 2022/11/20 16:50
  * @version: 1.0
  */

@@ -1,6 +1,5 @@
 package game.role;
 
-import game.RPGGame.RPGItem;
 import game.role.item.Inventory;
 
 /**

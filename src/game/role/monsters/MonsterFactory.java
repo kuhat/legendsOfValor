@@ -11,11 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @projectName: monstersAndHerios
+ * @projectName: monstersAndHeroes
  * @package: game.role.monsters
  * @className: MonsterFactory
  * @author: Danny
- * @description: TODO
+ * @description: Monster Factory class which create monster instances
  * @date: 2022/11/3 20:51
  * @version: 1.0
  */

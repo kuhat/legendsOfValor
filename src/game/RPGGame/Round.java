@@ -349,7 +349,6 @@ public class Round {
     }
 
     private boolean isValidateMove(int i, int j) {
-
         if (i >= 0 && i < 8 && j >= 0 && j < 8) {
             if (j == 2 || j == 5) {
                 System.out.println(ConsoleColorsCodes.RED + "You are trying to access Inaccessible area!!" + RESET);

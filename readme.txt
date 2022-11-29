@@ -22,6 +22,7 @@ game/RPGGame/InaccessibleCell.java: Inaccessible Cell instance which the heroes 
 game/RPGGame/MarketCell.java: MarketCell instance where heroes can sell and buy items
 game/RPGGame/normalCell.java: Normal Cell instance where battle against monsters may occur
 game/RPGGame/RPGItem.java: Base item object which inherited by all the items
+game/PRGGame/Round.java: Round class where heroes and Monsters take action
 game/role/attackable.java: Base interface for objects that have attack behavior
 game/role/Buyable.java: Base interface for objects that can buy other items
 game/role/mountable.java: Base interface for objects that can be mounted to other roles
@@ -50,6 +51,12 @@ game/role/monsters/Exoskeleton.java: Exoskeleton Instance
 game/role/monsters/Monster.java: Base monster class inherited by all the monsters
 game/role/monsters/MonsterFactory.java: Factory creator which only incharge of producing monster objects
 game/role/monsters/Spirit.java: Instance of spirits
+game/role/places/Bush.java: Bush place which boosts role's dexterity
+game/role/places/Cave.java: Cave place which boosts role's agility
+game/role/places/Koulou/java: Koulou place which boosts role's strength
+game/role/places/Map.java: Map class which inherits from Board, the place where the player play game
+game/role/places/Nexus.java: Nexus place where heroes and Monsters spawn and heroes can buy things
+game/role/places/Plain.java: Plain place which boosts nothing
 -------------------------------------------------------------------------------------------------------------
 
 
@@ -61,6 +68,8 @@ objects
 
 Coding platform: Windows
 
+Bonus Points: Background Music, Colorful output, input parse from txt files, factory pattern
+
 
 How to run:
 ---------------------------------------------------------------------------------------------------------------
@@ -69,4 +78,9 @@ How to run:
 
 javac -d bin src/*.java src/game/*.java src/game/utils/*.java src/game/RPGGame/*.java src/game/role/*.java src/game/role/heroes/*.java src/game/role/item/*.java src/game/role/monsters/*.java
 java -cp bin main
+
+
+Sample output
+---------------------------------------------------------------------------------------------------------------
+
 

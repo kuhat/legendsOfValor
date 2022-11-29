@@ -9,7 +9,7 @@ import game.role.monsters.Monster;
  * @package: game.role.places
  * @className: Plain
  * @author: Danny
- * @description: TODO
+ * @description: Plain place which boosts nothing
  * @date: 2022/11/20 16:50
  * @version: 1.0
  */

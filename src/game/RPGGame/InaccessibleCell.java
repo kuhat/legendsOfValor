@@ -1,7 +1,6 @@
 package game.RPGGame;
 
 import game.role.heroes.Party;
-import game.role.role;
 
 /**
  * @projectName: monstersAndHerios

@@ -1,29 +1,17 @@
 package game;
 
 import game.RPGGame.Board;
-import game.RPGGame.Cell;
-import game.RPGGame.RPGItem;
 import game.RPGGame.Round;
 import game.role.heroes.Hero;
 import game.role.heroes.Party;
-import game.role.item.Armor;
-import game.role.item.Potion;
-import game.role.item.Spell;
-import game.role.item.Weapon;
-import game.role.monsters.Monster;
 import game.role.monsters.MonsterFactory;
-import game.role.mountable;
 import game.role.places.*;
 import game.role.role;
-import game.utils.ConsoleColorsCodes;
 import game.utils.instructions;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import static game.utils.ConsoleColorsCodes.GREEN_BOLD_BRIGHT;
 import static game.utils.ConsoleColorsCodes.YELLOW_BOLD_BRIGHT;
 
 /**
@@ -31,7 +19,7 @@ import static game.utils.ConsoleColorsCodes.YELLOW_BOLD_BRIGHT;
  * @package: game
  * @className: GameRunner
  * @author: Danny
- * @description: Running instance of the game
+ * @description: Running instance of the game which inherits from GameState
  * @date: 2022/11/3 20:45
  * @version: 1.0
  */
@@ -159,7 +147,7 @@ public class GameRunner implements GameState {
             role newMonster = (role) MonsterFactory.getInstance().creatProduct();
             while (newMonster.getLevel() > maxLevel) newMonster = (role) MonsterFactory.getInstance().creatProduct();
             newMonster.setPos(0, i * 3 + 1);
-            newMonster.setCharacter("M" + ((numRounds / 8) + i + 1));
+            newMonster.setCharacter("M" + ((numRounds / 8) * 3 + i + 1));
             MonsterParty.addMember(newMonster);
             printStream.println("Monster " + GREEN + newMonster.getName() + RESET + " was spawned.");
         }

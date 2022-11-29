@@ -3,7 +3,26 @@
   <component name="ChangeListManager">
     <list default="true" id="4399c6f5-6a81-40fd-8f23-ddbe102bbb40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GameRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/InaccessibleCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/InaccessibleCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/RPGGame/RPGItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/RPGItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/RPGGame/Round.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/RPGGame/Round.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/Buyable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/Buyable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/item/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/item/Potion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/monsters/Dragon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/monsters/Dragon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/monsters/Exoskeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/monsters/Exoskeleton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/monsters/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/monsters/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/monsters/MonsterFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/monsters/MonsterFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/monsters/Spirit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/monsters/Spirit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Bush.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Bush.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Cave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Cave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Koulou.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Koulou.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Nexus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Nexus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/role/places/Plain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/role/places/Plain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/utils/ConsoleColorsCodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/utils/ConsoleColorsCodes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/utils/audio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/utils/audio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +122,8 @@
       <workItem from="1669510587581" duration="5507000" />
       <workItem from="1669572992661" duration="17260000" />
       <workItem from="1669590685816" duration="656000" />
-      <workItem from="1669654105125" duration="15444000" />
+      <workItem from="1669654105125" duration="16460000" />
+      <workItem from="1669751670017" duration="3846000" />
     </task>
     <servers />
   </component>
