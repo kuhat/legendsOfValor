@@ -1,7 +1,5 @@
 package game.role.places;
 
-import game.GameRunner;
-import game.RPGGame.InaccessibleCell;
 import game.RPGGame.RPGItem;
 import game.RPGGame.normalCell;
 import game.role.heroes.Hero;
@@ -19,7 +17,7 @@ import static game.utils.ConsoleColorsCodes.YELLOW_BOLD_BRIGHT;
  * @package: game.role.places
  * @className: Nexus
  * @author: Danny
- * @description: TODO
+ * @description: The nexus where heroes and monster spawn
  * @date: 2022/11/20 16:49
  * @version: 1.0
  */
@@ -37,7 +35,6 @@ public class Nexus extends normalCell {
         if (role.getType().equals("Hero")) {
             instructions.printMarketMsg(role);
             super.setContent(role.getCharacter() + "     ");
-            instructions.printMarketMsg(role);
             act(role);
         } else {
             // if Monster enters a Nexus, then Heroes lose
@@ -231,8 +228,8 @@ public class Nexus extends normalCell {
             }
             RPGItem item = weaponList.get(Integer.parseInt(input));
             inventory.removeItem(item);
-            ((Hero) role).setGold(((Hero)role).getGold() + item.getPrice());
-            System.out.println("Transaction success! hero gains gold " + GREEN + item.getPrice() + RESET +  ", Now the hero has: " +
+            ((Hero) role).setGold(((Hero)role).getGold() + item.getPrice() / 2);
+            System.out.println("Transaction success! hero gains gold " + GREEN + item.getPrice() / 2 + RESET +  ", Now the hero has: " +
                     YELLOW_BOLD_BRIGHT + ((Hero) role).getGold() + RESET);
         }
     }
@@ -253,8 +250,8 @@ public class Nexus extends normalCell {
             }
             RPGItem item = armorList.get(Integer.parseInt(input));
             inventory.removeItem(item);
-            ((Hero) role).setGold(((Hero)role).getGold() + item.getPrice());
-            System.out.println("Transaction success! hero gains gold " + GREEN + item.getPrice() + RESET +  ", Now the hero has: " +
+            ((Hero) role).setGold(((Hero)role).getGold() + item.getPrice() / 2);
+            System.out.println("Transaction success! hero gains gold " + GREEN + item.getPrice() / 2 + RESET +  ", Now the hero has: " +
                     YELLOW_BOLD_BRIGHT + ((Hero) role).getGold() + RESET);
         }
     }
@@ -275,8 +272,8 @@ public class Nexus extends normalCell {
             }
             RPGItem item = potionList.get(Integer.parseInt(input));
             inventory.removeItem(item);
-            ((Hero) role).setGold(((Hero)role).getGold() + item.getPrice());
-            System.out.println("Transaction success! hero gains gold " + GREEN + item.getPrice() + RESET +  ", Now the hero has: " +
+            ((Hero) role).setGold(((Hero)role).getGold() + item.getPrice() / 2);
+            System.out.println("Transaction success! hero gains gold " + GREEN + item.getPrice() / 2 + RESET +  ", Now the hero has: " +
                     YELLOW_BOLD_BRIGHT + ((Hero) role).getGold() + RESET);
         }
     }
@@ -297,8 +294,8 @@ public class Nexus extends normalCell {
             }
             RPGItem item = spellList.get(Integer.parseInt(input));
             inventory.removeItem(item);
-            ((Hero) role).setGold(((Hero)role).getGold() + item.getPrice());
-            System.out.println("Transaction success! hero gains gold " + GREEN + item.getPrice() + RESET +  ", Now the hero has: " +
+            ((Hero) role).setGold(((Hero)role).getGold() + item.getPrice() / 2);
+            System.out.println("Transaction success! hero gains gold " + GREEN + item.getPrice() / 2 + RESET +  ", Now the hero has: " +
                     YELLOW_BOLD_BRIGHT + ((Hero) role).getGold() + RESET);
         }
     }

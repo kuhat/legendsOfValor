@@ -8,7 +8,7 @@ import game.role.role;
  * @package: game.role.monsters
  * @className: Spirits
  * @author: Danny
- * @description: TODO
+ * @description: Spirit monster type
  * @date: 2022/11/3 21:24
  * @version: 1.0
  */

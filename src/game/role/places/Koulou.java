@@ -10,7 +10,7 @@ import game.utils.ConsoleColorsCodes;
  * @package: game.role.places
  * @className: Koulou
  * @author: Danny
- * @description: TODO
+ * @description: Koulou place which boosts role's strength
  * @date: 2022/11/20 16:50
  * @version: 1.0
  */

@@ -10,7 +10,7 @@ import game.utils.ConsoleColorsCodes;
  * @package: game.role.places
  * @className: Cave
  * @author: Danny
- * @description: TODO
+ * @description: Cave place which boosts role's agility
  * @date: 2022/11/20 16:49
  * @version: 1.0
  */

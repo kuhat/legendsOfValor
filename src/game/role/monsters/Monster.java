@@ -8,7 +8,7 @@ import game.role.role;
  * @package: game.role.monsters
  * @className: Monster
  * @author: Danny
- * @description: TODO
+ * @description: Monster base class which extends role can attack
  * @date: 2022/11/3 18:33
  * @version: 1.0
  */

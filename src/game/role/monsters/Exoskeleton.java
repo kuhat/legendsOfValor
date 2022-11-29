@@ -7,7 +7,7 @@ import game.role.Prop;
  * @package: game.role.monsters
  * @className: Exoskeleton
  * @author: Danny
- * @description: TODO
+ * @description: Exoskeleton monster type
  * @date: 2022/11/3 21:24
  * @version: 1.0
  */
