@@ -35,7 +35,6 @@ public class Nexus extends normalCell {
         if (role.getType().equals("Hero")) {
             instructions.printMarketMsg(role);
             super.setContent(role.getCharacter() + "     ");
-            instructions.printMarketMsg(role);
             act(role);
         } else {
             // if Monster enters a Nexus, then Heroes lose

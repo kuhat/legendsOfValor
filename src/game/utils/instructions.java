@@ -1,5 +1,6 @@
 package game.utils;
 
+import game.GameRunner;
 import game.RPGGame.RPGItem;
 import game.role.heroes.*;
 import game.role.item.*;
@@ -145,7 +146,7 @@ public class instructions {
 
     public static void printMarketMsg(role role) {
         System.out.println("Welcome to Nexus, do you want to buy or sell items? \n " +
-                "The hero's gold is " + ((Hero) role).getGold());
+                "The hero's gold is " + CYAN + ((Hero) role).getGold() + RESET);
     }
 
     /**
