@@ -1,0 +1,90 @@
+##################
+# Design Choices #
+##################
+
+The design of the game is based on the following principles:
+
+The code base is split into following packages and classes:
+
+#game package: Stores the packages, classes and interface of a game.
+    #role package: Stores the packages, classes and interface of various roles, like hero, monster, item and places (spaces).
+        #heroes package: Stores the classes and interface of a Hero and it's types: Paladin, Sorcerer, and Warrior.
+            *Hero: abstract class inherited by all the heroes, which can attack and buy items.
+            *HeroFactory: class to create heroes of different type
+            *Paladin: class for Paladin Heroes
+            *Party: class that represents party of heroes.
+            *Sorceror: class for Sorceror Heroes
+            *Warrior: class for Warrior Heroes
+        #item package: Stores the packages, classes and interface item - inventory.
+            *Armor: Stores the attributes and methods of an Armor.
+            *fireSpell: Stores the attributes and methods of a fireSpell.
+            *iceSpell: Stores the attributes and methods of a iceSpell.
+            *Inventory: Stores the attributes and methods of an Inventory owed by Heroes.
+            *ItemFactory: Stores the attributes and methods of an ItemFactory.
+            *lingtningSpell: Stores the attributes and methods of a lingtningSpell.
+            *Potion: Stores the attributes and methods of a Potion.
+            *Spell: Abstract class that stores the attributes and methods of a Spell.
+            *SpellFactory: Stores the attributes and methods of an SpellFactory.
+            *Weapon: Stores the attributes and methods of a Weapon.
+        #monster package: Stores the classes and interface of a Monster and it's types: Dragon, Exoskeleton, and Spirit.
+            *Dragon: Stores the attributes and methods of a Dragon.
+            *Exoskeleton: Stores the attributes and methods of an Exoskeleton.
+            *Monster: abstract class inherited by all the monster
+            *MonsterFactory: class to create monsters of different type
+            *Spirit: Stores the attributes and methods of a Spirit.
+        #places package: Stores the classes of different types of spaces and Maps
+            *Bush: Stores the attributes and methods of a Bush, and both heroes and monsters calls their respective methods when they enter and exit the bush.
+            *Cave: Stores the attributes and methods of a Cave, and both heroes and monsters calls their respective methods when they enter and exit the cave.
+            *Koulou: Stores the attributes and methods of a Koulou, and both heroes and monsters calls their respective methods when they enter and exit the koulou.
+            *Map: Stores the attributes and methods of map.
+            *Nexus: Stores the attributes and methods of a Nexus.
+            *Plain: Stores the attributes and methods of a Plain.
+        *attackable: Interface implemented by monster and hero
+        *Buyable: interface for items which have common behaviors (buyable) and implemented by the all types of heroes for the items they can buy.
+        *mountable: Interface for the times those can be mounted by the hero
+        *Prop: This is the class that has general properties of a role to have: Heroes and Monsters
+        *role: Interface that has base role instance inherited by monsters and heroes
+        *RoleFactory: A base factory interface to generate roles
+        *Sellable: interface for items which have common behaviors (sellable)
+    #RPGGame package: Stores the classes and interface of a RPGGame
+        *Board: Board class, containing the cells of inaccessible, normal cells and market cells.
+        *Cell: Stores the attributes and methods of each cell in the game board.
+        *InaccessibleCell: Stores the attributes and methods of the cell that cannot be entered.
+        *MarketCell: Stores the attributes and methods of the cell where heroes can sell or buy items.
+        *NormalCell: Stores the attributes and methods of the normal cell
+        *Round: Stores the attributes and methods of the round which is performed by one hero and one monster.
+        *RPGItem: Stores the attributes and methods of the base item class inherited by all the items.
+    #utils package: Stores the classes for Sound, Colors, File Reading and Instructions.
+        *audio: Stores the attributes and methods for sound in the game.
+        *ConsoleColorsCodes: Stores the attributes for color codes.
+        *fileReader: Stores the attributes and methods of fileReader.
+        *instructions: Stores the attributes and methods for instructions.
+    *FactoryCreator: Base factory creator interface.
+    *GameRunner: Running instance of the game.
+    *GameState: Stores the attributes and methods for game state.
+    *Product: Product interface for product of each object.
+
+* Game: Stores the attributes and methods of a game.
+* main: Class that contains main method and starts the game.
+
+Game Legends of Valor is extension of Legends: Monster Vs Heroes so we choose to reuse the whole project
+which was submitted in the form of Assignment 3, and started working on it by redesigning few
+features such as cells and battle.
+In LOV, cells are redesigned as spaces. So new package "Places" is created which contains new logic like: spaces - Bush,
+Cave, Koulou, Nexus and Plain, all these cells are inherited from the normal cells which allow any kind of further extension.
+A new round class is added, which is performed by one hero and one monster.
+Audio and color classes added which are used as utility.
+
+Both of us had fully functioning design and we didn't want to hybrid the game and increase the complexity and
+both of the projects were equally amazing, so we decided to pick one and move ahead with one design
+but also incorporated some behaviours from the other design. For example, we added armor and weapon object in hero's attribute.
+
+Post fact:
+Our decision of picking one project and moving ahead with it was perfect because of the following reasons:
+1. It saved us from a lot of rework.
+2. We implemented few features from the other game, which doesn't increase our rework and had capability of extendability.
+3. The previous structure of the game is well-implemented with reusable classes and components, which can be extended without much modification.
+4. Inheritances and interfaces in the previous design are useful when extending the functions.
+5. Factory patterns and buyables, mountables can be reused.
+
+
